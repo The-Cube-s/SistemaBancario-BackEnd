@@ -3,7 +3,7 @@
 import User from './user.model.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { encrypt, checkPassword } from '../utils/validator.js'
+import { encrypt, checkPassword, checkUpdate } from '../utils/validator.js'
 import { generateJwt } from '../utils/jwt.js'
 
 export const test = (req, res) =>{
@@ -48,6 +48,20 @@ const mathRandom = () =>{
     return num
 }
 
+const passwordRandomToClient = () =>{
+    //tendra 10 cifras
+    const length = 10; 
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let password = '';
+    
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        password += chars[randomIndex];
+    }
+    
+    return password;
+}
+
 
 export const userDefect = async(req,res) =>{
     try {
@@ -78,13 +92,20 @@ export const userDefect = async(req,res) =>{
     }
 } 
 
+// ////////////// Aqui lo haremos como lo hace el BI ////////////////
+// Osea que le demos una contraseña predeterminada y luego la cambie dentro de la app
 export const register = async(req, res) =>{
     try {
         let data = req.body
         let findUser = await User.findOne({username: data.username})
         if(findUser) return res.status(403).send({message: `User ${data.username} alredy exists`})
-        data.password = await encrypt(data.password) 
-        data,noaccount = await mathRandom()
+        //Generara una contraseña aleatoria
+        data.password = passwordRandomToClient();
+        console.log(data.password);
+        //Luego de ver la contraseña la encryptamos
+        data.password = await encrypt(data.password);
+    
+        data.noaccount = await mathRandom()
         data.role = 'CLIENT'
         let user = new User(data)
         await user.save()
@@ -92,5 +113,32 @@ export const register = async(req, res) =>{
     } catch (err) {
         console.error(err);
         return res.status(500).send({message: 'Error register user ' })
+    }
+}
+
+export const updateUser = async (req, res) => {
+    try {
+        const userId = req.params.id; // Obtener el ID del parámetro de la URL
+        let data = req.body;
+
+        
+
+        // Validar los datos de actualización
+        const { valid, message } = checkUpdate(data, userId);
+        if (!valid) return res.status(400).send({ message });
+
+        // Acción de actualizar
+        let updateUser = await User.findOneAndUpdate(
+            { _id: userId },
+            { $set: data },
+            { new: true }
+        );
+
+        if (!updateUser) return res.status(401).send({ message: 'User not found' });
+
+        return res.send({ message: 'User updated', updateUser });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error updating user' });
     }
 }

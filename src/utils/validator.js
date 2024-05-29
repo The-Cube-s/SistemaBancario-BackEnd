@@ -19,25 +19,25 @@ export const checkPassword = async(password, hash) =>{
     }
 }
 
-export const checkUpdate = (data, userId)=>{
-    if (userId){
-        //validamos si data esta vacío   o 
-        if(Object.entries(data).length === 0  
-        || data.password 
-        || data.password == ''){
-            return false
-        }
-        return true
-    }else{
-        if(Object.entries(data).length === 0  
-        || data.keeper 
-        || data.keeper == '' ){
-            return false
-        }
-        return true
-    }
-}
+export const checkUpdate = (data, userId) => {
+    const editableFields = ['password', 'surname', 'email', 'phone'];
+    const dataEntries = Object.entries(data);
 
+    if (dataEntries.length === 0) {
+        return { valid: false, message: "No data provided for update" };
+    }
+
+    for (let [key, value] of dataEntries) {
+        if (!editableFields.includes(key)) {
+            return { valid: false, message: `Field ${key} cannot be updated` };
+        }
+        if (value === '' && key !== 'password') {
+            return { valid: false, message: `Field ${key} cannot be empty` };
+        }
+    }
+
+    return { valid: true, message: "" };
+}
 export const checkUpdateRole = (data, userId)=>{
     if (userId){
         //validamos si data esta vacío   o 
