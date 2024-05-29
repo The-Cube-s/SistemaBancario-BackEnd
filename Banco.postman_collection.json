@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "d7da59a9-2f6a-46fe-9d46-258a0a66c609",
+		"name": "Banco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34907660"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU2NGVkODllMDkyNTQ1ODQ1NmY1MTYiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTY5MzI4NjQsImV4cCI6MTcxNjk0NzI2NH0.sKekS5EvnowlwCzrhaqkeeEvrqd_9NgqiUe5y2-KCQY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "juan",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "juancho",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Juani",
+									"type": "text"
+								},
+								{
+									"key": "noaccount",
+									"value": "3344156553089095701",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DPI",
+									"value": "1234567891234",
+									"type": "text"
+								},
+								{
+									"key": "adress",
+									"value": "12 avenida",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "guatemala",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "elpa@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "jobname",
+									"value": "Programador",
+									"type": "text"
+								},
+								{
+									"key": "monthlyincome",
+									"value": "1500.50",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "0",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "account",
+									"value": "ADMINB",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ADMINB",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "0",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU2NzY3NzYzNTNjYTM4NzZkN2FhNTgiLCJuYW1lIjoianVhbiIsInVzZXJuYW1lIjoianVhbmkiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzE2OTQyNTg3LCJleHAiOjE3MTY5NTY5ODd9.UqyEHhFomjK53coWj2a3HTzU2kWm9soSwY7U0w3zGxw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "NewSurname",
+									"type": "text"
+								},
+								{
+									"key": "noaccount",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DPI",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "adress",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Mipadre",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "juanito@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "jobname",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "monthlyincome",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/user/updateUser/665676776353ca3876d7aa58",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"updateUser",
+								"665676776353ca3876d7aa58"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
