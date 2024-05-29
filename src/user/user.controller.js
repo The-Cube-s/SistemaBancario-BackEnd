@@ -3,7 +3,7 @@
 import User from './user.model.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { encrypt, checkPassword } from '../utils/validator.js'
+import { encrypt, checkPassword, checkUpdate } from '../utils/validator.js'
 import { generateJwt } from '../utils/jwt.js'
 
 export const test = (req, res) =>{
@@ -84,7 +84,7 @@ export const register = async(req, res) =>{
         let findUser = await User.findOne({username: data.username})
         if(findUser) return res.status(403).send({message: `User ${data.username} alredy exists`})
         data.password = await encrypt(data.password) 
-        data,noaccount = await mathRandom()
+        data.noaccount = await mathRandom()
         data.role = 'CLIENT'
         let user = new User(data)
         await user.save()
@@ -92,5 +92,38 @@ export const register = async(req, res) =>{
     } catch (err) {
         console.error(err);
         return res.status(500).send({message: 'Error register user ' })
+    }
+}
+
+export const update = async(req, res) =>{
+    try {
+        let { id } = req.params
+        let data = req.body
+        let update = checkUpdate(data, id)
+        if(!update) return res.status(400).send({message: 'Have submitted some data that can not be update'})
+        data.password = await encrypt(data.password)
+        let updateUser = await User.findOneAndUpdate(
+            { _id: id },
+            data,
+            { new: true }
+        )
+        if(!updateUser) return res.status(401).send({message: 'User not fount and not update'})
+        return res.send({message: 'Update user', updateUser})
+    } catch (err) {
+        console.error(err)
+        if(err.keyValue.username)return res.status(400).send({message: `Username ${err.keyValue.username} is alredy exists`})
+        return res.status(500).send({message: 'Error updating account'})
+    }
+}
+
+export const deleteUser = async(req, res)=>{
+    try {
+        let { id } = req.params
+        let deletedUser = await User.findOneAndDelete({_id: id})
+        if(!deletedUser) return res.status(404).send({message: 'Account not found and not delete'})
+        return res.send({message: `Account with username ${deletedUser.username} delete successfully`}) 
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message: `Error deleting account`})
     }
 }
