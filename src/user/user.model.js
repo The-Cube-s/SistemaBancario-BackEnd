@@ -25,7 +25,7 @@ const userSchema = Schema({
         minLength: 13,
         required: true
     },
-    adress: {
+    address: {
         type: String,
         required: true
     },

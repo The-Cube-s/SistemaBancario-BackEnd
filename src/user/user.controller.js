@@ -68,7 +68,7 @@ export const userDefect = async(req,res) =>{
             phone: '12345678',
             role: 'ADMIN',
             jobname: 'asdasd',
-            monthlyincome: '2503.20'
+            monthlyincome: '00.00'
         })
          
         await newUser.save()
@@ -77,6 +77,8 @@ export const userDefect = async(req,res) =>{
         console.error(err)
     }
 } 
+
+
 
 export const register = async(req, res) =>{
     try {
@@ -99,7 +101,7 @@ export const update = async(req, res) =>{
     try {
         let { id } = req.params
         let data = req.body
-        let update = checkUpdate(data, id)
+        let update = xcheckUpdate(data, id)
         if(!update) return res.status(400).send({message: 'Have submitted some data that can not be update'})
         data.password = await encrypt(data.password)
         let updateUser = await User.findOneAndUpdate(
@@ -137,3 +139,10 @@ export const getUser = async(req, res) => {
         return res.status(500).send({message: 'Error getting users'})
     }
 }
+
+/* FUNCIONES DEL ADMIN AL CLIENTE 
+    EDITAR, ELIMINAR, VISUALIZAR, AGREGAR OTRO ADMIN o CLIENTE
+
+    EXCEPTO A OTRO ADMIN
+*/
+
