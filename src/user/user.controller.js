@@ -127,3 +127,13 @@ export const deleteUser = async(req, res)=>{
         return res.status(500).send({message: `Error deleting account`})
     }
 }
+
+export const getUser = async(req, res) => {
+    try {
+        let users = await User.find()
+        return res.send({users})
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message: 'Error getting users'})
+    }
+}
