@@ -1,7 +1,7 @@
 'use strict'
 import { hash, compare } from 'bcrypt'
 
-export const encrypt = (password) =>{
+export const encrypt = (password) => {
     try {
         return hash(password, 10)
     } catch (error) {
@@ -10,7 +10,7 @@ export const encrypt = (password) =>{
     }
 }
 
-export const checkPassword = async(password, hash) =>{
+export const checkPassword = async (password, hash) => {
     try {
         return await compare(password, hash)
     } catch (error) {
@@ -19,71 +19,40 @@ export const checkPassword = async(password, hash) =>{
     }
 }
 
-export const checkUpdate = (data, userId)=>{
-    if (userId){
+export const checkUpdateProduct = async (data, productId) => {
+    if (productId) {
         //validamos si data esta vacío   o 
-        if(Object.entries(data).length === 0  
-        || data.password 
-        || data.password == ''){
-            return false
-        }
-        return true
-    }else{
-        if(Object.entries(data).length === 0  
-        || data.keeper 
-        || data.keeper == '' ){
-            return false
-        }
-        return true
-    }
-}
-
-export const checkUpdateRole = (data, userId)=>{
-    if (userId){
-        //validamos si data esta vacío   o 
-        if(Object.entries(data).length === 0  
-        || data.role 
-        || data.role == ''){
-            return false
-        }
-        return true
-    }
-}
-
-export const checkUpdateProduct = (data, productId)=>{
-    if(productId){
-        if(
-            Object.entries(data).length === 0 ||
+        if (Object.entries(data).length === 0 ||
             data.name ||
             data.name == '' ||
-            data.stock ||
-            data.stock === ''        
-        ) {
-            return false
-        }
-        return true
-    }else{
-        if(
-            Object.entries(data).length === 0 ||
-            data.category ||
-            data.category == ''
-        ) {
+            data.description ||
+            data.description == '' ||
+            data.price ||
+            data.price == '') {
             return false
         }
         return true
     }
 }
 
-export const checkUpdatePurchase = (data, purchaseId)=>{
-    if(purchaseId){
-        if(
-            Object.entries(data).length === 0 ||
-            data.amount ||
-            data.amount === '' ||
-            data.date ||
-            data.date === '') {
-            return false
+export const checkUpdate = (data, userId) => {
+    if (userId) {
+        const forbiddenFields = [
+            'name',
+            'DPI',
+            'noaccount',
+            'address',
+            'jobname',
+            'monthlyincome'
+        ];
+        for (const field of forbiddenFields) {
+            if (data[field] !== undefined) {
+                return false;
+            }
         }
-        return true
+        if (data.password === '') {
+            return false;
+        }
     }
-}
+    return true;
+};
