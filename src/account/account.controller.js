@@ -23,12 +23,23 @@ export const saveAccount = async(req, res) =>{
         if(!user) return res.status(404).send({message: 'User not found'})
         let findAccount = await Account.findOne({user: data.user, typeofaccount: data.typeofaccount})
         if(findAccount) return res.status(401).send({message: 'Account alredy exists'})
+        if(data.balance < 0 ) return res.status(401).send({message: 'The balance cannot be less than 0'})
         data.noaccount = await mathRandom()
         let account = new Account(data)
         await account.save()
-        return res.send({message: 'Account save successfully'})
+        return res.send({message: 'Account save successfully', account})
     } catch (err) {
         console.error(err)
         return res.status(500).send({message: 'Error save account'})
+    }
+}
+
+export const getAccount = async(req, res) =>{
+    try {
+        let account = await Account.find()
+        return res.send(account)
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message: 'Error getting account'})
     }
 }
