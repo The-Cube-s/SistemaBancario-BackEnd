@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import { Schema, model } from "mongoose";
 
 const accountSchema = Schema({
     noaccount: {
@@ -7,6 +7,12 @@ const accountSchema = Schema({
     },
     balance: {
         type: Number,
+        required: true
+    },
+    typeofaccount: {
+        type: String,
+        uppercase: true,
+        enum: ['AHORRO', 'MONETARIA'],
         required: true
     },
     user: {
