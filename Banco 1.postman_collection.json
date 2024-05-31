@@ -1,0 +1,623 @@
+{
+	"info": {
+		"_postman_id": "b2439f9e-73c4-4ddc-8fc0-febaf90ba939",
+		"name": "Banco 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35350706"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cache-Control",
+										"value": "no-cache",
+										"name": "cache-control",
+										"type": "text"
+									},
+									{
+										"key": "Postman-Token",
+										"value": "<calculated when request is sent>",
+										"name": "postman-token",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"name": "content-type",
+										"type": "text"
+									},
+									{
+										"key": "Content-Length",
+										"value": "<calculated when request is sent>",
+										"name": "content-length",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "<calculated when request is sent>",
+										"name": "host",
+										"type": "text"
+									},
+									{
+										"key": "User-Agent",
+										"value": "PostmanRuntime/7.32.1",
+										"name": "user-agent",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*",
+										"name": "accept",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "gzip, deflate, br",
+										"name": "accept-encoding",
+										"type": "text"
+									},
+									{
+										"key": "Connection",
+										"value": "keep-alive",
+										"name": "connection",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2Y3OTAxZGViZDcxNWE3ZTQ3NGQiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTcxNzU2OTgsImV4cCI6MTcxNzE5MDA5OH0.AwVrs1Y-Sre615wBScIPaFFYCCnGOECrACIOg5uloIs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "account",
+											"value": "Byron14",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "cara",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:2656/user/login",
+									"host": [
+										"localhost"
+									],
+									"port": "2656",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "test",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Cache-Control",
+										"value": "no-cache",
+										"name": "cache-control",
+										"type": "text"
+									},
+									{
+										"key": "Postman-Token",
+										"value": "<calculated when request is sent>",
+										"name": "postman-token",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "<calculated when request is sent>",
+										"name": "host",
+										"type": "text"
+									},
+									{
+										"key": "User-Agent",
+										"value": "PostmanRuntime/7.32.1",
+										"name": "user-agent",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*",
+										"name": "accept",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "gzip, deflate, br",
+										"name": "accept-encoding",
+										"type": "text"
+									},
+									{
+										"key": "Connection",
+										"value": "keep-alive",
+										"name": "connection",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2Y3OTAxZGViZDcxNWE3ZTQ3NGQiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTcxNzU4NDUsImV4cCI6MTcxNzE5MDI0NX0.isYQ_v6w-IhQh__l4N162xYFKtg-ecN3L5q3ABT0RSw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "localhost:2656/user/deleteUser/665a06c77d6d6011140bc09b",
+									"host": [
+										"localhost"
+									],
+									"port": "2656",
+									"path": [
+										"user",
+										"deleteUser",
+										"665a06c77d6d6011140bc09b"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update y register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2Y3OTAxZGViZDcxNWE3ZTQ3NGQiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTcxNzU4NDUsImV4cCI6MTcxNzE5MDI0NX0.isYQ_v6w-IhQh__l4N162xYFKtg-ecN3L5q3ABT0RSw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Byron",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "lopez",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Byron14",
+									"type": "text"
+								},
+								{
+									"key": "noaccount",
+									"value": "3344156553089095701",
+									"type": "text"
+								},
+								{
+									"key": "DPI",
+									"value": "3924005610407",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "jejej",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "cara",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "cara",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "jobname",
+									"value": "cara",
+									"type": "text"
+								},
+								{
+									"key": "monthlyincome",
+									"value": "1234312.99",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "CLIENT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "account",
+									"value": "ADMINB",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ADMINB",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:2656/product/test",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"product",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2Y3OTAxZGViZDcxNWE3ZTQ3NGQiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTcxNjk1NTQsImV4cCI6MTcxNzE4Mzk1NH0.Sh3RrjzTS1Be067Aqp9iwMLTOI_DzRtXvEqiljDI36A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Liptom",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Refresco",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "50.00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/product/saveProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"product",
+								"saveProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5Y2Y3OTAxZGViZDcxNWE3ZTQ3NGQiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTcxNjk1NTQsImV4cCI6MTcxNzE4Mzk1NH0.Sh3RrjzTS1Be067Aqp9iwMLTOI_DzRtXvEqiljDI36A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:2656/product/login",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"product",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Test",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:2656/account/test",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"account",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveAccount",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "noaccount",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "typeofaccount",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

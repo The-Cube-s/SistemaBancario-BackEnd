@@ -39,16 +39,6 @@ export const login = async(req, res) => {
     }
 }
 
-
-const mathRandom = () =>{
-    let num = ''
-    for(let i = 0; i < 20; i++){
-        num += Math.floor(Math.random() * 10)
-    }
-    return num
-}
-
-
 export const userDefect = async(req,res) =>{
     try {
         const userExists = await User.findOne({username: 'ADMINB'})        
@@ -61,7 +51,6 @@ export const userDefect = async(req,res) =>{
             surname: 'ADMINB',
             username: 'ADMINB',
             password: encryptPassword,
-            noaccount: mathRandom(),
             DPI: '1234567891234',
             address: 'ADMINB',
             email: 'ADMINB',
@@ -70,7 +59,7 @@ export const userDefect = async(req,res) =>{
             jobname: 'asdasd',
             monthlyincome: '00.00'
         })
-         
+
         await newUser.save()
     }   
     } catch (err) {
@@ -90,7 +79,6 @@ export const register = async(req, res) =>{
         })
         if(findUser) return res.status(403).send({message: `User ${data.username} alredy exists`})
         data.password = await encrypt(data.password) 
-        data.noaccount = await mathRandom()
         let user = new User(data)
         await user.save()
         return res.send({message: `Register successfully, can be logged with user ${user.username}`})
@@ -99,7 +87,7 @@ export const register = async(req, res) =>{
         return res.status(500).send({message: 'Error register user', err })
     }
 }
-
+/* ADMIN A ADMIN  */
 export const updateAdmin = async(req, res) => {
     try {
         let data = req.body
@@ -122,7 +110,7 @@ export const updateAdmin = async(req, res) => {
         return res.status(500).send({message: 'Error updating ADMIN'})
     }
 }
-
+/* update client ADMIN A CLIENTE*/
 export const update = async(req, res) =>{
     try {
         let { id } = req.params
@@ -144,6 +132,33 @@ export const update = async(req, res) =>{
     }
 }
 
+/* CLIENT A CLIENT */
+export const updateClient = async(req, res) =>{
+    try {
+        let { id } = req.params
+        let data = req.body
+        let update = checkUpdate(data, id)
+        if(!update) return res.status(400).send({message: 'Have submitted some data that can not be update'})
+        let secretKey = process.env.SECRET_KEY
+        let token = req.headers.authorization
+        const { uid } = jwt.verify(token, secretKey)
+        if(uid != id ) return res.status(404).send({ message: 'You can not update another CLIENT'})
+        data.password = await encrypt(data.password)
+        let updateUser = await User.findOneAndUpdate(
+            { _id: id },
+            data,
+            { new: true }
+        )
+        if(!updateUser) return res.status(401).send({message: 'User not fount and not update'})
+        return res.send({message: 'Update user', updateUser})
+    } catch (err) {
+        console.error(err)
+        if(err.keyValue.username)return res.status(400).send({message: `Username ${err.keyValue.username} is alredy exists`})
+        return res.status(500).send({message: 'Error updating account'})
+    }
+}
+
+/* ADMIN a CLIENT */
 export const deleteUser = async(req, res)=>{
     try {
         let { id } = req.params
@@ -155,6 +170,7 @@ export const deleteUser = async(req, res)=>{
         return res.status(500).send({message: `Error deleting account`})
     }
 }
+
 
 export const getUser = async(req, res) => {
     try {
@@ -168,7 +184,5 @@ export const getUser = async(req, res) => {
 
 /* FUNCIONES DEL ADMIN AL CLIENTE 
     EDITAR, ELIMINAR, VISUALIZAR, AGREGAR OTRO ADMIN o CLIENTE
-
     EXCEPTO A OTRO ADMIN
 */
-

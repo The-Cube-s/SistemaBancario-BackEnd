@@ -12,6 +12,6 @@ api.delete('/deleteUser/:id', [ validateJwt, isAdmin], deleteUser)
 //Update de admins
 api.put('/updateAdmin/:id', [validateJwt, isAdmin], updateAdmin)
 //Funcionalidades del cliente
-api.put('/update/:id', [validateJwt, isClient], update)
+api.put('/updateClient/:id', [validateJwt, isClient], update)
 
 export default api
