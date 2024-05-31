@@ -63,7 +63,7 @@ export const userDefect = async(req,res) =>{
             password: encryptPassword,
             noaccount: mathRandom(),
             DPI: '1234567891234',
-            adress: 'ADMINB',
+            address: 'ADMINB',
             email: 'ADMINB',
             phone: '12345678',
             role: 'ADMIN',
