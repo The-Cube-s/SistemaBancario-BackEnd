@@ -1,28 +1,28 @@
-import { Schema, model } from "mongoose";
+    import { Schema, model } from "mongoose";
 
-const accountSchema = Schema({
-    noaccount: {
-        type: String,
-        required: true
+    const accountSchema = Schema({
+        noaccount: {
+            type: String,
+            required: true
+        },
+        balance: {
+            type: Number,
+            required: true
+        },
+        typeofaccount: {
+            type: String,
+            uppercase: true,
+            enum: ['AHORRO', 'MONETARIA'],
+            required: true
+        },
+        user: {
+            type: Schema.ObjectId,
+            ref: 'user',
+            required: true
+        }
     },
-    balance: {
-        type: Number,
-        required: true
-    },
-    typeofaccount: {
-        type: String,
-        uppercase: true,
-        enum: ['AHORRO', 'MONETARIA'],
-        required: true
-    },
-    user: {
-        type: Schema.ObjectId,
-        ref: 'user',
-        required: true
-    }
-},
-{
-    versionKey: false
-})
+    {
+        versionKey: false
+    })
 
-export default model('account', accountSchema)
+    export default model('account', accountSchema)

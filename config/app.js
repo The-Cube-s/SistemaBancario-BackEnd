@@ -10,6 +10,7 @@ import { config } from "dotenv"
 import userRoutes from '../src/user/user.routes.js'
 import productRoutes from '../src/product/product.routes.js'
 import accountRoutes from '../src/account/account.routes.js'
+import transferRoutes from '../src/transfer/transfer.routes.js'
 
 //Configuraciones
 const app = express()
@@ -25,6 +26,7 @@ app.use(morgan('dev'))
 app.use('/user', userRoutes)
 app.use('/product', productRoutes)
 app.use('/account', accountRoutes)
+app.use('/transfer', transferRoutes)
 
 export const initServer = () => {
     app.listen(port)
