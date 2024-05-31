@@ -115,6 +115,10 @@ export const update = async(req, res) =>{
     try {
         let { id } = req.params
         let data = req.body
+        let userToUpdate = await User.findById(id)
+        if(userToUpdate.role === 'ADMIN') {
+            return res.status(403).send({ message: 'No se permite actualizar usuarios con rol de administrador' });
+        }
         let update = checkUpdate(data, id)
         if(!update) return res.status(400).send({message: 'Have submitted some data that can not be update'})
         data.password = await encrypt(data.password)
@@ -162,6 +166,10 @@ export const updateClient = async(req, res) =>{
 export const deleteUser = async(req, res)=>{
     try {
         let { id } = req.params
+        let userToDelete = await User.findById(id)
+        if(userToDelete.role === 'ADMIN') {
+            return res.status(403).send({ message: 'No se permite eliminar usuarios con rol de administrador' });
+        }
         let deletedUser = await User.findOneAndDelete({_id: id})
         if(!deletedUser) return res.status(404).send({message: 'Account not found and not delete'})
         return res.send({message: `Account with username ${deletedUser.username} delete successfully`}) 
