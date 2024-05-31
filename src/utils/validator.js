@@ -19,17 +19,24 @@ export const checkPassword = async(password, hash) =>{
     }
 }
 
-//Validacion de updateUser
-export const checkUpdate = async(data, userId)=>{
-    if (userId){
-        //validamos si data esta vacío   o 
-        if(Object.entries(data).length === 0  
-        || data.password == ''){
-            return false
+//Validacion de updateUser (No se puede cambiar los campos de abajo)
+export const checkUpdate = (data, userId) => {
+    if (userId) {
+        // Estos campos no se pueden editar
+        const nonEditableFields = ['name', 'DPI', 'noaccount', 'address', 'jobname', 'monthlyincome']; 
+        const containsNonEditableFields = Object.keys(data).some(key => nonEditableFields.includes(key));
+
+        if (containsNonEditableFields) {
+            return false;
         }
-        return true
+        // Decimos que password no debe estar vacia
+        if (Object.entries(data).length === 0 || data.password === '') {
+            return false;
+        }
+        return true;
     }
-}
+    return false;
+};
 
 export const checkUpdateProduct = async(data, productId)=>{
     if (productId){
