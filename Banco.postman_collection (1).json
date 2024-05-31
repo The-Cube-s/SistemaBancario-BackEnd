@@ -1,0 +1,669 @@
+{
+	"info": {
+		"_postman_id": "d7da59a9-2f6a-46fe-9d46-258a0a66c609",
+		"name": "Banco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34907660"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU2NGVkODllMDkyNTQ1ODQ1NmY1MTYiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTY5MzI4NjQsImV4cCI6MTcxNjk0NzI2NH0.sKekS5EvnowlwCzrhaqkeeEvrqd_9NgqiUe5y2-KCQY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "juan",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "juancho",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Juani",
+									"type": "text"
+								},
+								{
+									"key": "noaccount",
+									"value": "3344156553089095701",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DPI",
+									"value": "1234567891234",
+									"type": "text"
+								},
+								{
+									"key": "adress",
+									"value": "12 avenida",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "guatemala",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "elpa@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "jobname",
+									"value": "Programador",
+									"type": "text"
+								},
+								{
+									"key": "monthlyincome",
+									"value": "1500.50",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "0",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "account",
+									"value": "ADMINB",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ADMINB",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU5MTY3ZjlhN2Y4OTExZjI4ZDFkOTQiLCJuYW1lIjoianVhbiIsInVzZXJuYW1lIjoianVhbmkiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzE3MTE1NDE1LCJleHAiOjE3MTcxMjk4MTV9.rNeBpIN7I_fR_ymTg9TTZYyph_ukhu0VzCc8B5uqQHY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "NewSurname",
+									"type": "text"
+								},
+								{
+									"key": "noaccount",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "DPI",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "adress",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Mipadre",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "juanito@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "jobname",
+									"value": "prosti",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "monthlyincome",
+									"value": "8000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/user/update/6659167f9a7f8911f28d1d94",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"update",
+								"6659167f9a7f8911f28d1d94"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver perfiles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU2NGVkODllMDkyNTQ1ODQ1NmY1MTYiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTcxMTU2OTAsImV4cCI6MTcxNzEzMDA5MH0.uOQLWVxwAeplquJ_JqfLtfIud0no0t8pbaoppMoZhu8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:2656/user/getUser",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"user",
+								"getUser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Agregar producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU2NGVkODllMDkyNTQ1ODQ1NmY1MTYiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTcxMTYwNjAsImV4cCI6MTcxNzEzMDQ2MH0.ra0trx32QPvrE4Hshfb9E5q5z7zpsxVHdPYegwbtR4E",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pelota de fut",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Pelota para niños",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "50",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/product/saveProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"product",
+								"saveProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Productos",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjU2NGVkODllMDkyNTQ1ODQ1NmY1MTYiLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTcxMTU2OTAsImV4cCI6MTcxNzEzMDA5MH0.uOQLWVxwAeplquJ_JqfLtfIud0no0t8pbaoppMoZhu8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Pelota",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Para niños",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "350",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:2656/product/updateProduct/66591cad830a05c24387e4d3",
+							"host": [
+								"localhost"
+							],
+							"port": "2656",
+							"path": [
+								"product",
+								"updateProduct",
+								"66591cad830a05c24387e4d3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
