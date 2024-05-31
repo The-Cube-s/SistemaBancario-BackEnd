@@ -78,22 +78,48 @@ export const userDefect = async(req,res) =>{
     }
 } 
 
-
-
+//Register general 
 export const register = async(req, res) =>{
     try {
         let data = req.body
-        let findUser = await User.findOne({username: data.username})
+        let findUser = await User.findOne({
+            $or: [
+                {username: data.username},
+                {email: data.email}
+            ]
+        })
         if(findUser) return res.status(403).send({message: `User ${data.username} alredy exists`})
         data.password = await encrypt(data.password) 
         data.noaccount = await mathRandom()
-        data.role = 'CLIENT'
         let user = new User(data)
         await user.save()
         return res.send({message: `Register successfully, can be logged with user ${user.username}`})
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message: 'Error register user ' })
+        return res.status(500).send({message: 'Error register user', err })
+    }
+}
+
+export const updateAdmin = async(req, res) => {
+    try {
+        let data = req.body
+        let { id } = req.params
+        let update = checkUpdate(data, id)
+        if(!update) return res.status(400).send({message: 'Have submitted some data that can not be update'})
+        let secretKey = process.env.SECRET_KEY
+        let token = req.headers.authorization
+        const { uid } = jwt.verify(token, secretKey)
+        if( uid != id) return res.status(404).send({message: 'You cant not update another ADMIN'})
+        let updateAdmin = await User.findOneAndUpdate(
+            {_id: id},
+            data,
+            {new: true}
+        )
+        if(!updateAdmin) return res.status(404).send({message: 'ADMIN not found and not update'})
+        return res.send({message: 'ADMIN updated successfully', updateAdmin})
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message: 'Error updating ADMIN'})
     }
 }
 
@@ -101,7 +127,7 @@ export const update = async(req, res) =>{
     try {
         let { id } = req.params
         let data = req.body
-        let update = xcheckUpdate(data, id)
+        let update = checkUpdate(data, id)
         if(!update) return res.status(400).send({message: 'Have submitted some data that can not be update'})
         data.password = await encrypt(data.password)
         let updateUser = await User.findOneAndUpdate(
