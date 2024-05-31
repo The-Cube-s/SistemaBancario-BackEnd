@@ -22,7 +22,7 @@ export const checkPassword = async(password, hash) =>{
 //Validacion de updateUser (No se puede cambiar los campos de abajo)
 export const checkUpdate = (data, userId) => {
     if (userId) {
-        // Estos campos no se pueden editar
+        // Estos campos no se pueden editar :3
         const nonEditableFields = ['name', 'DPI', 'noaccount', 'address', 'jobname', 'monthlyincome']; 
         const containsNonEditableFields = Object.keys(data).some(key => nonEditableFields.includes(key));
 
