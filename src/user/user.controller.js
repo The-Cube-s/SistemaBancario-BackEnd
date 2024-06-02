@@ -48,20 +48,6 @@ const mathRandom = () =>{
     return num
 }
 
-const passwordRandomToClient = () =>{
-    //tendra 10 cifras
-    const length = 10; 
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let password = '';
-    
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * chars.length);
-        password += chars[randomIndex];
-    }
-    
-    return password;
-}
-
 
 export const userDefect = async(req,res) =>{
     try {
@@ -77,12 +63,12 @@ export const userDefect = async(req,res) =>{
             password: encryptPassword,
             noaccount: mathRandom(),
             DPI: '1234567891234',
-            adress: 'ADMINB',
+            address: 'ADMINB',
             email: 'ADMINB',
             phone: '12345678',
             role: 'ADMIN',
             jobname: 'asdasd',
-            monthlyincome: '2503.20'
+            monthlyincome: '00.00'
         })
          
         await newUser.save()
@@ -92,53 +78,97 @@ export const userDefect = async(req,res) =>{
     }
 } 
 
-// ////////////// Aqui lo haremos como lo hace el BI ////////////////
-// Osea que le demos una contraseña predeterminada y luego la cambie dentro de la app
+//Register general 
 export const register = async(req, res) =>{
     try {
         let data = req.body
-        let findUser = await User.findOne({username: data.username})
+        let findUser = await User.findOne({
+            $or: [
+                {username: data.username},
+                {email: data.email}
+            ]
+        })
         if(findUser) return res.status(403).send({message: `User ${data.username} alredy exists`})
-        //Generara una contraseña aleatoria
-        data.password = passwordRandomToClient();
-        console.log(data.password);
-        //Luego de ver la contraseña la encryptamos
-        data.password = await encrypt(data.password);
-    
+        data.password = await encrypt(data.password) 
         data.noaccount = await mathRandom()
-        data.role = 'CLIENT'
         let user = new User(data)
         await user.save()
         return res.send({message: `Register successfully, can be logged with user ${user.username}`})
     } catch (err) {
         console.error(err);
-        return res.status(500).send({message: 'Error register user ' })
+        return res.status(500).send({message: 'Error register user', err })
     }
 }
 
-export const updateUser = async (req, res) => {
+export const updateAdmin = async(req, res) => {
     try {
-        const userId = req.params.id; // Obtener el ID del parámetro de la URL
-        let data = req.body;
-
-        
-
-        // Validar los datos de actualización
-        const { valid, message } = checkUpdate(data, userId);
-        if (!valid) return res.status(400).send({ message });
-
-        // Acción de actualizar
-        let updateUser = await User.findOneAndUpdate(
-            { _id: userId },
-            { $set: data },
-            { new: true }
-        );
-
-        if (!updateUser) return res.status(401).send({ message: 'User not found' });
-
-        return res.send({ message: 'User updated', updateUser });
+        let data = req.body
+        let { id } = req.params
+        let update = checkUpdate(data, id)
+        if(!update) return res.status(400).send({message: 'Have submitted some data that can not be update'})
+        let secretKey = process.env.SECRET_KEY
+        let token = req.headers.authorization
+        const { uid } = jwt.verify(token, secretKey)
+        if( uid != id) return res.status(404).send({message: 'You cant not update another ADMIN'})
+        let updateAdmin = await User.findOneAndUpdate(
+            {_id: id},
+            data,
+            {new: true}
+        )
+        if(!updateAdmin) return res.status(404).send({message: 'ADMIN not found and not update'})
+        return res.send({message: 'ADMIN updated successfully', updateAdmin})
     } catch (err) {
         console.error(err);
-        return res.status(500).send({ message: 'Error updating user' });
+        return res.status(500).send({message: 'Error updating ADMIN'})
     }
 }
+
+export const update = async(req, res) =>{
+    try {
+        let { id } = req.params
+        let data = req.body
+        let update = checkUpdate(data, id)
+        if(!update) return res.status(400).send({message: 'Have submitted some data that can not be update'})
+        data.password = await encrypt(data.password)
+        let updateUser = await User.findOneAndUpdate(
+            { _id: id },
+            data,
+            { new: true }
+        )
+        if(!updateUser) return res.status(401).send({message: 'User not fount and not update'})
+        return res.send({message: 'Update user', updateUser})
+    } catch (err) {
+        console.error(err)
+        if(err.keyValue.username)return res.status(400).send({message: `Username ${err.keyValue.username} is alredy exists`})
+        return res.status(500).send({message: 'Error updating account'})
+    }
+}
+
+export const deleteUser = async(req, res)=>{
+    try {
+        let { id } = req.params
+        let deletedUser = await User.findOneAndDelete({_id: id})
+        if(!deletedUser) return res.status(404).send({message: 'Account not found and not delete'})
+        return res.send({message: `Account with username ${deletedUser.username} delete successfully`}) 
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message: `Error deleting account`})
+    }
+}
+
+export const getUser = async(req, res) => {
+    try {
+        let users = await User.find()
+        return res.send({users})
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({message: 'Error getting users'})
+    }
+}
+
+/* FUNCIONES DEL ADMIN AL CLIENTE 
+    EDITAR, ELIMINAR, VISUALIZAR, AGREGAR OTRO ADMIN o CLIENTE
+
+    EXCEPTO A OTRO ADMIN
+*/
+

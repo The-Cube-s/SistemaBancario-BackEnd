@@ -5,12 +5,18 @@ import User from '../user/user.model.js'
 
 export const validateJwt = async(req, res, next)=>{
     try{
+        //obtener la llave de acceso al token
         let secretKey = process.env.SECRET_KEY
-        let token = req.body.token || req.query.token || req.headers['authorization']
-        if (!token) return res.status(401).send('A token is required for authentication')
-        //token = token.replace(/^Bearer\s+/, '')
-        let { uid } = jwt.verify(token, secretKey)
-        let user = await User.findOne({ _id: uid })
+        //obtener el token de los header
+        let { authorization } = req.headers
+        //console.log(authorization);
+        //verificar si viene el token
+        if(!authorization) return res.status(401).send({message: 'Unauthorized'})
+        //obtener el uid del usuario que envio el token
+        let { uid } = jwt.verify(authorization, secretKey)
+        //validar si aun existe en la bd
+        let user = await User.findOne({_id: uid})
+        if(!user) return res.status(404).send({message: 'User not found - Unauthorized'})
         req.user = user
         next()
     }catch(err){

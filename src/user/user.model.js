@@ -15,17 +15,13 @@ const userSchema = Schema({
         lowercase: true,
         unique: true
     },
-    noaccount: {
-        type: Number,
-        required: true
-    },
     DPI: {
         type: Number,
         maxLength: 13,
         minLength: 13,
         required: true
     },
-    adress: {
+    address: {
         type: String,
         required: true
     },
