@@ -56,3 +56,19 @@ export const checkUpdate = (data, userId) => {
     }
     return true;
 };
+
+export const checkUpdateBuy = async (data, productId) => {
+    if (productId) {
+        //validamos si data esta vacío   o 
+        if (Object.entries(data).length === 0 ||
+            data.name ||
+            data.name == '' ||
+            data.description ||
+            data.description == '' ||
+            data.price ||
+            data.price == '') {
+            return false
+        }
+        return true
+    }
+}
