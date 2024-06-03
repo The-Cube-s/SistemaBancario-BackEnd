@@ -6,6 +6,6 @@ import { isAdmin, isClient, validateJwt } from "../middlewares/validate_Jwt.js"
 
 const api = Router()
 
-api.post('/depositMoney', [validateJwt, isClient], depositMoney)
+api.post('/depositMoney', [validateJwt, isAdmin], depositMoney)
 
 export default api
