@@ -1,6 +1,6 @@
-import { Schema, model, version } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const favoritesSchema = Schema ({
+const favoritesSchema = Schema({
     alias: {
         type: String,
         required: true
@@ -9,10 +9,14 @@ const favoritesSchema = Schema ({
         type: Schema.ObjectId,
         ref: 'account',
         required: true
+    },
+    dpi: {
+        type: String,
+        required: true
     }
 },
 {
     versionKey: false
-})
+});
 
-export default model('favorites', favoritesSchema)
+export default model('favorites', favoritesSchema);
