@@ -3,7 +3,8 @@ import { Schema, model } from "mongoose";
 const accountSchema = Schema({
     noaccount: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     balance: {
         type: Number,

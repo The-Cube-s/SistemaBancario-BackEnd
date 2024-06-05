@@ -14,14 +14,10 @@ const userSchema = Schema({
         required: true,
         lowercase: true,
         unique: true
-    },
-    noaccount: {
-        type: Number,
-        required: true,
-        unique: true
-    },
+    },    
     DPI: {
         type: Number,
+        unique: true,
         maxLength: 13,
         minLength: 13,
         required: true

@@ -60,8 +60,7 @@ export const userDefect = async(req,res) =>{
             name: 'ADMINB',
             surname: 'ADMINB',
             username: 'ADMINB',
-            password: encryptPassword,
-            noaccount: mathRandom(),
+            password: encryptPassword,            
             DPI: '1234567891234',
             address: 'ADMINB',
             email: 'ADMINB',
@@ -88,9 +87,14 @@ export const register = async(req, res) =>{
                 {email: data.email}
             ]
         })
-        if(findUser) return res.status(403).send({message: `User ${data.username} alredy exists`})
-        data.password = await encrypt(data.password) 
-        data.noaccount = await mathRandom()
+        if(findUser) return res.status(403).send({satisfiesmessage: `User ${data.username} alredy exists`})
+        
+        if (parseFloat(data.monthlyincome) < 100) {
+            //return res.status(400).send({ message: '' });
+            return res.status(400).send({ message: 'Monthly income should be 100 or more'});
+        }
+
+        data.password = await encrypt(data.password)        
         // Asignar el rol 'CLIENT' por defecto
         data.role = 'CLIENT';
 
