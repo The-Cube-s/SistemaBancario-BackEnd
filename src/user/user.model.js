@@ -15,6 +15,11 @@ const userSchema = Schema({
         lowercase: true,
         unique: true
     },
+    noaccount: {
+        type: Number,
+        required: true,
+        unique: true
+    },
     DPI: {
         type: Number,
         maxLength: 13,
