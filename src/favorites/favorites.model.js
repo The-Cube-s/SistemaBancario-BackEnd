@@ -1,6 +1,8 @@
-import { Schema, model, version } from "mongoose";
 
-const favoritesSchema = Schema ({
+import { Schema, model } from "mongoose";
+
+const favoritesSchema = Schema({
+
     alias: {
         type: String,
         required: true
@@ -8,6 +10,10 @@ const favoritesSchema = Schema ({
     account: {
         type: Schema.ObjectId,
         ref: 'account',
+        required: true
+    },
+    dpi: {
+        type: String,
         required: true
     }
 },
