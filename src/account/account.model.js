@@ -20,7 +20,17 @@ const accountSchema = Schema({
         type: Schema.ObjectId,
         ref: 'user',
         required: true
-    }
+    },
+    favorites: [
+        {
+            alias: String,
+            noaccount: String,
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        }
+    ]
 },
 {
     versionKey: false
