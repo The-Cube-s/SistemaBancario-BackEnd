@@ -1,0 +1,340 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Banco",
+    "dateExported": "2024-06-06T22:02:14.531Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "af1fee9c-6602-4c17-9a87-13951688b764",
+            "name": "User",
+            "containerId": "",
+            "created": "2024-06-06T06:36:34.514Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "eeaeb759-82a1-4d14-a66c-41dae21f2f32",
+            "name": "Account",
+            "containerId": "",
+            "created": "2024-06-06T06:42:57.605Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "cc32d0ca-99b6-4979-a79d-0fdd0bc9a76a",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "af1fee9c-6602-4c17-9a87-13951688b764",
+            "name": "Login Client",
+            "url": "localhost:2656/user/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-06-06T06:36:46.098Z",
+            "modified": "2024-06-06T21:50:19.587Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "account",
+                        "value": "rube"
+                    },
+                    {
+                        "name": "password",
+                        "value": "guatemala"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "b530b66c-0a50-48fd-a54b-4fc37749dea9",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "af1fee9c-6602-4c17-9a87-13951688b764",
+            "name": "Login ADMIN",
+            "url": "localhost:2656/user/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-06T06:36:54.389Z",
+            "modified": "2024-06-06T06:37:19.161Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "account",
+                        "value": "ADMINB"
+                    },
+                    {
+                        "name": "password",
+                        "value": "ADMINB"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "7497d796-6616-4969-84cf-0497204331f1",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "af1fee9c-6602-4c17-9a87-13951688b764",
+            "name": "Get users",
+            "url": "localhost:2656/user/getUser",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-06-06T06:38:10.260Z",
+            "modified": "2024-06-06T06:38:56.712Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjYwMDRmODJlOGQxZDZjMGZkYTExNjciLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTc2NTU4ODIsImV4cCI6MTcxNzY3MDI4Mn0.2Phv1Pch_iORWlXoXv78UCn9AZEsIqGPJjEmr6QAddE"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "dd19a0ac-6827-46d0-9613-a50d1ef52bb8",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "af1fee9c-6602-4c17-9a87-13951688b764",
+            "name": "Actualizar Usuario",
+            "url": "localhost:2656/user/update/6660084cfe0716f3a5b52024",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-06-06T06:39:46.458Z",
+            "modified": "2024-06-06T06:42:42.356Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjYwMDg0Y2ZlMDcxNmYzYTViNTIwMjQiLCJuYW1lIjoiUnViZW4iLCJ1c2VybmFtZSI6InJ1YmUiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzE3NjU2MTUxLCJleHAiOjE3MTc2NzA1NTF9.oUHzT29R2zCx0qCgGDDrZCz1mGsGL8gmAj86PjEp9Ek"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "surname",
+                        "value": "Rubenaso"
+                    },
+                    {
+                        "name": "password",
+                        "value": "guatemala"
+                    },
+                    {
+                        "name": "email",
+                        "value": "ruben@gmail.com"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "31ba4dfc-cc43-44ce-b8dd-5ec71b460397",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "eeaeb759-82a1-4d14-a66c-41dae21f2f32",
+            "name": "Add Acount",
+            "url": "localhost:2656/account/saveAccount",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-06-06T06:43:03.493Z",
+            "modified": "2024-06-06T22:00:59.434Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjYwMDRmODJlOGQxZDZjMGZkYTExNjciLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTc3MTEwNjgsImV4cCI6MTcxNzcyNTQ2OH0.WSFLyJLno-6JAdi-OORd68rVVzkejdOtU_4vUqNVZ50"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "noaccount",
+                        "value": "",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "balance",
+                        "value": "500"
+                    },
+                    {
+                        "name": "typeofaccount",
+                        "value": "MONETARIA"
+                    },
+                    {
+                        "name": "user",
+                        "value": "6662311d41117e590e5a1795"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "627c1d3d-da04-4b6f-b7e8-a4b8967ce6b8",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "eeaeb759-82a1-4d14-a66c-41dae21f2f32",
+            "name": "Agregar Favorito",
+            "url": "localhost:2656/account/addFavorite",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2024-06-06T06:44:58.164Z",
+            "modified": "2024-06-06T06:46:59.448Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjYwMDg0Y2ZlMDcxNmYzYTViNTIwMjQiLCJuYW1lIjoiUnViZW4iLCJ1c2VybmFtZSI6InJ1YmUiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzE3NjU2MTUxLCJleHAiOjE3MTc2NzA1NTF9.oUHzT29R2zCx0qCgGDDrZCz1mGsGL8gmAj86PjEp9Ek"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "user",
+                        "value": "6660084cfe0716f3a5b52024"
+                    },
+                    {
+                        "name": "alias",
+                        "value": "Rubenazo"
+                    },
+                    {
+                        "name": "noaccount",
+                        "value": "63256107732503758794"
+                    },
+                    {
+                        "name": "dpi",
+                        "value": "1234567891232"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "7a11d4c1-c020-456c-8c3e-99589a5a8bac",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "eeaeb759-82a1-4d14-a66c-41dae21f2f32",
+            "name": "Ver favorito",
+            "url": "localhost:2656/account/getFavorites/6660084cfe0716f3a5b52024",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-06-06T06:52:27.963Z",
+            "modified": "2024-06-06T22:01:29.643Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjYwMDg0Y2ZlMDcxNmYzYTViNTIwMjQiLCJuYW1lIjoiUnViZW4iLCJ1c2VybmFtZSI6InJ1YmUiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzE3NzExMjgyLCJleHAiOjE3MTc3MjU2ODJ9._hzoFD80XrXhZMGmrvfz7cPYGIbjFdeJHYcSF0aQvKA"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "db57dc87-a3a9-4c80-b9fa-dae0414e5ed4",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "eeaeb759-82a1-4d14-a66c-41dae21f2f32",
+            "name": "Convertidor",
+            "url": "localhost:2656/account/convertData",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-06-06T21:48:23.000Z",
+            "modified": "2024-06-06T21:53:50.208Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjYwMDg0Y2ZlMDcxNmYzYTViNTIwMjQiLCJuYW1lIjoiUnViZW4iLCJ1c2VybmFtZSI6InJ1YmUiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzE3NzEwNjE5LCJleHAiOjE3MTc3MjUwMTl9.gIRigalJu6taJM5hJF1JxhNAkLs69g7UodVGmf3P9gw"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "from",
+                        "value": "GTQ"
+                    },
+                    {
+                        "name": "to",
+                        "value": "EUR"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "ab82d3d3-4abd-41c4-a6da-1236b7eebb3c",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "af1fee9c-6602-4c17-9a87-13951688b764",
+            "name": "Registrar usuario",
+            "url": "localhost:2656/user/register",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2024-06-06T21:55:28.536Z",
+            "modified": "2024-06-06T21:58:53.127Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjYwMDRmODJlOGQxZDZjMGZkYTExNjciLCJuYW1lIjoiQURNSU5CIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTc3MTEwNjgsImV4cCI6MTcxNzcyNTQ2OH0.WSFLyJLno-6JAdi-OORd68rVVzkejdOtU_4vUqNVZ50"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Usuario"
+                    },
+                    {
+                        "name": "surname",
+                        "value": "usuarioPrueba"
+                    },
+                    {
+                        "name": "username",
+                        "value": "user"
+                    },
+                    {
+                        "name": "DPI",
+                        "value": "1234567891212"
+                    },
+                    {
+                        "name": "address",
+                        "value": "kinal"
+                    },
+                    {
+                        "name": "password",
+                        "value": "futbol"
+                    },
+                    {
+                        "name": "email",
+                        "value": "usuario@gmail.com"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "11111111"
+                    },
+                    {
+                        "name": "jobname",
+                        "value": "Tester"
+                    },
+                    {
+                        "name": "monthlyincome",
+                        "value": "1200"
+                    }
+                ]
+            },
+            "tests": []
+        }
+    ]
+}
