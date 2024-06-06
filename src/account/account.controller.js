@@ -2,6 +2,7 @@
 
 import Account from './account.model.js';
 import User from '../user/user.model.js';
+import axios from "axios";
 
 const mathRandom = () => {
     let num = '';
@@ -115,3 +116,36 @@ export const getFavorites = async (req, res) => {
         return res.status(500).send({ message: 'Error getting favorites', error: err });
     }
 };
+
+//Función para convertir dinero
+export const convertData = async (req, res) => {
+    const path = process.env.API_URL;
+    const key = process.env.API_KEY;
+    const { from, to } = req.body;
+    const userId = req.user._id; // Obtener el ID del usuario autenticado
+
+    try {
+        // Buscar la cuenta más reciente del usuario
+        const account = await Account.findOne({ user: userId }).sort({ _id: -1 });
+        if (!account) return res.status(404).send({ message: 'Account not found' });
+
+        const amount = account.balance;
+        const url = `${path}/${key}/pair/${from}/${to}/${amount}`;
+
+        const { data } = await axios.get(url);
+
+        if (data && data.result === 'success') {
+            return res.send({
+                from: from,
+                to: to,
+                conversionRate: data.conversion_rate,
+                convertedAmount: data.conversion_result
+            });
+        }
+
+        return res.status(418).send({ message: 'Error en la solicitud', data });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Error al realizar la conversion', error });
+    }
+}
