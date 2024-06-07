@@ -149,3 +149,30 @@ export const convertData = async (req, res) => {
         return res.status(500).send({ message: 'Error al realizar la conversion', error });
     }
 }
+
+export const getAccountBalance = async (req, res) => {
+    try {
+        const accountId = req.params.id;
+        const account = await Account.findById(accountId);
+
+        if (!account) {
+            return res.status(404).send({ message: 'Account not found' });
+        }
+
+        const user = await User.findById(account.user);
+
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+
+        // Verificando si el usuario autenticado es ADMIN o el propietario de la cuenta
+        if (req.user.role === 'ADMIN' || req.user._id.toString() === user._id.toString()) {
+            return res.send({ balance: account.balance });
+        } else {
+            return res.status(403).send({ message: 'Access denied' });
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error getting account balance' });
+    }
+};

@@ -1,7 +1,7 @@
 'use strict'
 
 import { Router } from "express";
-import { saveAccount, test, getAccount, addFavorite, getFavorites, convertData } from './account.controller.js'
+import { saveAccount, test, getAccount, addFavorite, getFavorites, convertData, getAccountBalance } from './account.controller.js'
 import { isAdmin, validateJwt, isClient } from '../middlewares/validate_Jwt.js'
 
 const api = Router()
@@ -14,5 +14,6 @@ api.post('/addFavorite', [validateJwt, isClient], addFavorite);
 api.get('/getFavorites/:id', [validateJwt, isClient], getFavorites);  // Cambiado a :id
 //Convertidor de divisas
 api.post('/convertData', [validateJwt], convertData) 
+api.get('/getAccountBalance/:id', [validateJwt], getAccountBalance)
 
 export default api
