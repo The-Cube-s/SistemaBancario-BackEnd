@@ -1,7 +1,7 @@
-import { Schema, model, version } from "mongoose";
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
-
-const transferSchema = Schema({
+const transferSchema = new Schema({
     date: {
         type: Date,
         required: true
@@ -11,23 +11,22 @@ const transferSchema = Schema({
         required: true
     },
     userTarget: {
-        type: Number,
+        type: Schema.Types.ObjectId,
+        ref: 'Account',
         required: true
     },
     user: {
-        type: Schema.ObjectId,
-        ref: 'user',
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
-    //necesitamos el account del usuario
     account: {
-        type: Schema.ObjectId,
-        ref: 'account',
+        type: Schema.Types.ObjectId,
+        ref: 'Account',
         required: true
     }
-},
-{
+}, {
     versionKey: false
-})
+});
 
-export default model('transfer', transferSchema)
+export default model('Transfer', transferSchema);
