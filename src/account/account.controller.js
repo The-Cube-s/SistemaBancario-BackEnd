@@ -1,5 +1,72 @@
-'use strict'
+'use strict';
 
-import Account from './account.model.js'
-import User from '../user/user.model.js'
+import Account from './account.model.js';
+import User from '../user/user.model.js';
 
+const mathRandom = () => {
+    let num = '';
+    for (let i = 0; i < 20; i++) {
+        num += Math.floor(Math.random() * 10);
+    }
+    return num;
+};
+
+export const test = (req, res) => {
+    console.log('test is running');
+    return res.send({ message: 'Test is running' });
+};
+
+export const saveAccount = async (req, res) => {
+    try {
+        let data = req.body;
+        let user = await User.findOne({ _id: data.user });
+        if (!user) return res.status(404).send({ message: 'User not found' });
+        let findAccount = await Account.findOne({ user: data.user, typeofaccount: data.typeofaccount });
+        if (findAccount) return res.status(401).send({ message: 'Account already exists' });
+        if (data.balance < 0) return res.status(401).send({ message: 'The balance cannot be less than 0' });
+        data.noaccount = await mathRandom();
+        let account = new Account(data);
+        await account.save();
+        return res.send({ message: 'Account save successfully', account });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error save account' });
+    }
+};
+
+export const getAccount = async (req, res) => {
+    try {
+        let account = await Account.find();
+        return res.send(account);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error getting account' });
+    }
+};
+
+export const getAccountBalance = async (req, res) => {
+    try {
+        const accountId = req.params.id;
+        const account = await Account.findById(accountId);
+
+        if (!account) {
+            return res.status(404).send({ message: 'Account not found' });
+        }
+
+        const user = await User.findById(account.user);
+
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+
+        // Assuming req.user contains the authenticated user details
+        if (req.user.role === 'admin' || req.user._id.toString() === user._id.toString()) {
+            return res.send({ balance: account.balance });
+        } else {
+            return res.status(403).send({ message: 'Access denied' });
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error getting account balance' });
+    }
+};
