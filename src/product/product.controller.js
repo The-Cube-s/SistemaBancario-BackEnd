@@ -49,3 +49,13 @@ export const deleteProduct = async (req, res) => {
         return res.status(500).send({ message: 'Error deleteing product' })
     }
 }
+
+export const getProducts = async(req, res) =>{
+    try {
+        let products = await Product.find()
+        return res.send({products})
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({message: 'Error getting users'})
+    }
+}
