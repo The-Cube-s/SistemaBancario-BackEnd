@@ -1,6 +1,6 @@
 'use strict'
 import { Router } from 'express'
-import { deleteProduct, saveProduct, test, updateProduct } from './product.controller.js'
+import { deleteProduct, saveProduct, test, updateProduct, getProducts } from './product.controller.js'
 import { validateJwt, isAdmin, isClient } from '../middlewares/validate_Jwt.js'
 
 const api = Router()
@@ -10,5 +10,6 @@ api.get('/test', test)
 api.post('/saveProduct', [validateJwt, isAdmin] ,saveProduct)
 api.delete('/deleteProduct/:id', [validateJwt, isAdmin], deleteProduct)
 api.put('/updateProduct/:id', [validateJwt, isAdmin], updateProduct)
+api.get('/getProducts',[validateJwt], getProducts)
 
 export default api

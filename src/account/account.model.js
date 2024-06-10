@@ -3,7 +3,8 @@ import { Schema, model } from "mongoose";
 const accountSchema = Schema({
     noaccount: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     balance: {
         type: Number,
@@ -19,7 +20,17 @@ const accountSchema = Schema({
         type: Schema.ObjectId,
         ref: 'user',
         required: true
-    }
+    },
+    favorites: [
+        {
+            alias: String,
+            noaccount: String,
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        }
+    ]
 },
 {
     versionKey: false
