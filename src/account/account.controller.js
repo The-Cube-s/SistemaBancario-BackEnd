@@ -55,7 +55,7 @@ export const getAccount = async (req, res) => {
     }
 };
 
-//Función para convertir dinero
+//FUNCIÓN DE DIVISAS
 export const convertData = async (req, res) => {
     const path = process.env.API_URL;
     const key = process.env.API_KEY;

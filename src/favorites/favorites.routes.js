@@ -1,7 +1,7 @@
 'use strict'
 import { Router } from "express";
-import { getFavorites } from "./favorites.contoller.js";
-import { validateJwt, isClient } from "../middlewares/validate_Jwt";
+import { getFavorites, addFavorite } from "./favorites.contoller.js";
+import { validateJwt, isClient } from "../middlewares/validate_Jwt.js";
 
 const api = Router()
 

@@ -3,7 +3,7 @@
 import Deposit from "./deposit.model.js";
 import Account from "../account/account.model.js";
 import moment from "moment-timezone";
-
+import {checkUpdateAmount} from '../utils/validator.js'
 
 export const depositMoney = async (req, res) => {
   try {
@@ -37,3 +37,23 @@ export const depositMoney = async (req, res) => {
     return res.status(500).send({ message: "Error depositing money" });
   }
 };
+
+
+export const updateAmount = async(req, res) =>{
+  try {
+    let data = req.body
+    let { id } = req.params
+    let update = checkUpdateAmount(data, false)
+    if(!update) return res.status(404).send({message: 'Data is not save'})
+    let updateAmount = await Deposit.findOneAndUpdate(
+      {_id: id},
+      data,
+      { new: true }
+    )
+    if(!updateAmount) return res.status(404).send({message: 'Deposit not found and not updated'})
+    return res.send({message: 'Deposit was updating successfully'})
+  } catch (err) {
+    console.error(err)
+    return res.status(500).send({message: 'Have submitted some data that cannot be updated or missing data'})
+  }
+}

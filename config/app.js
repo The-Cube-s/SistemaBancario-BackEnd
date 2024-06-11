@@ -13,7 +13,7 @@ import accountRoutes from '../src/account/account.routes.js'
 import depositRoutes from '../src/deposit/deposit.routes.js'
 import transferRoutes from '../src/transfer/transfer.routes.js'
 import buyRoutes from '../src/buys/buys.routes.js'
-//import favoriteRoutes from '../src/favorites/favorites.contoller.js'
+import favoriteRoutes from '../src/favorites/favorites.routes.js'
 
 //Configuraciones
 const app = express()
@@ -32,7 +32,7 @@ app.use('/account', accountRoutes)
 app.use('/deposit', depositRoutes)
 app.use('/transfer', transferRoutes)
 app.use('/buy', buyRoutes)
-//app.use('/favorite', favoriteRoutes)
+app.use('/favorite', favoriteRoutes)
 
 export const initServer = () => {
     app.listen(port)

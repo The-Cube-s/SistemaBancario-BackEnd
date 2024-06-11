@@ -5,6 +5,7 @@ import { checkUpdateBuy } from '../utils/validator.js'
 //nuevos import
 import User from "../user/user.model.js"
 import Product from "../product/product.model.js"
+import jwt from 'jsonwebtoken'
 
 export const test = (req, res) => {
     console.log('Test is running');
@@ -14,9 +15,32 @@ export const test = (req, res) => {
 export const saveBuy = async (req, res) => {
     try {
         let data = req.body;
-        let buy = new Buys(data);
+        let user = await User.findOne({ _id: data.user })
+        let product = await Product.findOne({ _id: data.product })
+        let amountPrd = product.amount
+        if(!user ) return res.status(404).send({message: 'User not found'})
+        if(!product ) return res.status(404).send({message: 'Product not found'})
+        let secretKey = process.env.SECRET_KEY
+        let token = req.headers.authorization
+        const { uid } = jwt.verify(token, secretKey)
+        if(uid !== data.user) return res.status(401).send({ message: 'Enter your ID to make a buy'})
+        if( amountPrd === 0 ) return res.status(401).send({ message: 'We do not have that producto avaible'})
+        let buy = await Buys.findOne({ user: data.user, product: data.product })
+        if(buy){
+            buy.amount = +buy.amount + +data.amount
+        }else{
+            buy = new Buys({
+                amount: data.amount,
+                user: data.user,
+                product: data.product
+            })
+        }
+        let amount = buy.amount
+        if(amountPrd < amount) return res.status(404).send({message: 'Dont exists the amount required'})
+        product.amount -= buy.amount
+        await product.save()
         await buy.save();
-        return res.send({ message: 'Save is successful' });
+        return res.send({ message: 'Buy is successful' });
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: 'Buy was not saved', error: err.message });

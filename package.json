@@ -4,8 +4,7 @@
   "description": "III Proyecto Bimestral",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "TheCube's",
   "license": "ISC",
@@ -21,8 +20,5 @@
     "mongoose": "^8.4.0",
     "morgan": "^1.10.0"
   },
-  "type": "module",
-  "devDependencies": {
-    "nodemon": "^3.1.1"
-  }
+  "type": "module"
 }

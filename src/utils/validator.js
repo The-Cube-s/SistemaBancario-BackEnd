@@ -72,3 +72,18 @@ export const checkUpdateBuy = async (data, buyId) => {
         return true
     }
 }
+
+export const checkUpdateAmount = (data, depositId) => {
+    if(depositId) {
+        const forbidenAmount = 'amount'
+    for(const field of forbidenAmount){
+        if(data[field] !== undefined){
+            return false
+        }
+    }
+    if(data.date === '' || data.account === ''){
+        return false
+    }
+    }
+    return true
+}
