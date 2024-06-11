@@ -56,6 +56,6 @@ export const getProducts = async(req, res) =>{
         return res.send({products})
     } catch (err) {
         console.error(err)
-        return res.status(500).send({message: 'Error getting users'})
+        return res.status(500).send({message: 'Error getting product'})
     }
 }

@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Banco",
-    "dateExported": "2024-06-06T22:02:14.531Z",
+    "dateExported": "2024-06-07T00:20:17.455Z",
     "version": "1.1",
     "folders": [
         {
@@ -17,6 +17,13 @@
             "containerId": "",
             "created": "2024-06-06T06:42:57.605Z",
             "sortNum": 20000
+        },
+        {
+            "_id": "daae1888-bede-441a-9947-a10e51c0823f",
+            "name": "Transferencias",
+            "containerId": "",
+            "created": "2024-06-06T22:09:01.450Z",
+            "sortNum": 30000
         }
     ],
     "requests": [
@@ -331,6 +338,43 @@
                     {
                         "name": "monthlyincome",
                         "value": "1200"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "47527033-2c42-4ad0-be22-6925974f0665",
+            "colId": "4be9e3cf-4212-4eff-a42f-b280fd57866b",
+            "containerId": "daae1888-bede-441a-9947-a10e51c0823f",
+            "name": "Hacer transferencia",
+            "url": "localhost:2656/transfer/transferAmount",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2024-06-06T22:09:08.068Z",
+            "modified": "2024-06-07T00:11:47.236Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjYwMDg0Y2ZlMDcxNmYzYTViNTIwMjQiLCJuYW1lIjoiUnViZW4iLCJ1c2VybmFtZSI6InJ1YmUiLCJyb2xlIjoiQ0xJRU5UIiwiaWF0IjoxNzE3NzE3MTI3LCJleHAiOjE3MTc3MzE1Mjd9.ZiryHWFTquyxgBUKEuLA_RJDxh2fl4oEjOa6wQaGWYc"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "dpi",
+                        "value": "1234567891232"
+                    },
+                    {
+                        "name": "noaccount",
+                        "value": "78081471340912702488"
+                    },
+                    {
+                        "name": "amount",
+                        "value": "120"
                     }
                 ]
             },
