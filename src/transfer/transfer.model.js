@@ -11,22 +11,16 @@ const transferSchema = new Schema({
         required: true
     },
     userTarget: {
-        type: Schema.Types.ObjectId,
-        ref: 'Account',
+        type: String,
         required: true
     },
     user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    account: {
-        type: Schema.Types.ObjectId,
-        ref: 'Account',
+        type: Schema.ObjectId,
+        ref: 'user',
         required: true
     }
 }, {
     versionKey: false
 });
 
-export default model('Transfer', transferSchema);
+export default model('transfer', transferSchema);

@@ -8,6 +8,9 @@ export const addFavorite = async (req, res) => {
         let data = req.body
         let account = await Account.findOne({ _id: data.account })
         if(!account) return res.status(404).send({ message: 'Account not found'})
+        
+        let favorite = await Favorite.findOne({ alias: data.alias, account: data.account })
+        if(favorite) return res.status(404).send({ message: 'Alias or account must be diferent'})
         let favorites = new Favorite(data)
         await favorites.save()
         return res.send({message: 'Add favorites was successfully'})
@@ -18,20 +21,14 @@ export const addFavorite = async (req, res) => {
 };
 
 
-export const getFavorites = async (req, res) => {
+export const getAllFavorites = async(req, res) => {
     try {
-        // Obtener el ID del usuario de la solicitud
-        let id = req.params.id;
-        console.log(`Received id: ${id}`);
-        // Buscar las cuentas que contienen al usuario en sus favoritos
-        let accounts = await Account.find({ 'favorites.user': id })
-        // Filtrar las cuentas para obtener solo los favoritos del usuario
-        let favorites = accounts.flatMap(account => account.favorites.filter(favorite => favorite.user.equals(id)))
-        // Enviar la respuesta con la información simplificada de favoritos
-        return res.send(simplifiedFavorites);
+        let favorite = await Favorite.find()
+        return res.send({favorite})
     } catch (err) {
-        // Capturar cualquier error y enviar una respuesta de error
-        console.error(err);
-        return res.status(500).send({ message: 'Error getting favorites', error: err });
+        console.error(err)
+        return res.status(500).send({ message: 'Error getting favorite' });
     }
-};
+}
+
+
