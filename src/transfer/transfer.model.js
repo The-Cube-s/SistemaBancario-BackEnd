@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 const { Schema, model } = mongoose;
 
 const transferSchema = new Schema({
@@ -11,7 +11,8 @@ const transferSchema = new Schema({
         required: true
     },
     userTarget: {
-        type: String,
+        type: Schema.ObjectId,
+        ref: 'account',
         required: true
     },
     user: {
