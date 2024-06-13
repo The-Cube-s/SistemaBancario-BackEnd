@@ -47,8 +47,8 @@ export const saveAccount = async (req, res) => {
 
 export const getAccount = async (req, res) => {
     try {
-        let account = await Account.find();
-        return res.send(account);
+        let accounts = await Account.find();
+        return res.send(accounts);
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: 'Error getting account' });

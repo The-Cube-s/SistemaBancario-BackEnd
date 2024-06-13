@@ -18,8 +18,8 @@ const userSchema = Schema({
     DPI: {
         type: Number,
         unique: true,
-        maxLength: 13,
-        minLength: 13,
+        maxlength: 13,
+        minlength: 13,
         required: true
     },
     address: {
@@ -28,7 +28,7 @@ const userSchema = Schema({
     },
     password: {
         type: String,
-        minLength: [8, 'Password must be 8 characteres'],
+        minlength: [8, 'Password must be 8 characteres'],
         required: true
     },
     email: {
@@ -37,8 +37,8 @@ const userSchema = Schema({
     },
     phone: {
         type: String,
-        minLength: 8,
-        maxLength: 8,
+        minlength: 8,
+        maxlength: 8,
         required: true
     },
     jobname: {
