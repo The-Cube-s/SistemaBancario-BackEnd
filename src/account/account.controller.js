@@ -48,6 +48,7 @@ export const saveAccount = async (req, res) => {
 export const getAccount = async (req, res) => {
     try {
         let accounts = await Account.find();
+        //desestructure
         return res.send({accounts});
     } catch (err) {
         console.error(err);
