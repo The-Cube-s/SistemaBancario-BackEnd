@@ -1,6 +1,7 @@
 'use strict'
 import Favorite from './favorites.model.js'
 import Account from '../account/account.model.js'
+import User from '../user/user.model.js'
 
 // Controlador para agregar favoritos
 export const addFavorite = async (req, res) => {
@@ -24,7 +25,32 @@ export const addFavorite = async (req, res) => {
 export const getAllFavorites = async(req, res) => {
     try {
         let favorite = await Favorite.find()
-        return res.send({favorite})
+        //console.log(favorite[0].account);
+        let account = await Account.findOne({_id: favorite[0].account})
+        let user = await User.findOne({ _id: account.user})
+
+        console.log(user.name, user.DPI, user.surname);
+        let dataUser = "Name: "+ user.name + " " + "DPI: " + user.DPI + " " + " Apellido: "+ user.surname;
+        //console.log(account);
+        return res.send({favorite, dataUser})
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({ message: 'Error getting favorite' });
+    }
+}
+
+export const getById = async(req, res) => {
+    try {
+        let { search } = req.body
+        let favorite = await Favorite.find({ _id: search })
+        //console.log(favorite[0].account);
+        let account = await Account.findOne({_id: favorite[0].account})
+        let user = await User.findOne({ _id: account.user})
+
+        console.log(user.name, user.DPI, user.surname);
+        let dataUser = "Name: "+ user.name + " " + "DPI: " + user.DPI + " " + " Apellido: "+ user.surname;
+        //console.log(account);
+        return res.send({favorite, dataUser})
     } catch (err) {
         console.error(err)
         return res.status(500).send({ message: 'Error getting favorite' });

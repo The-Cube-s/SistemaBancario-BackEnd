@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Banco",
-    "dateExported": "2024-06-12T04:19:33.934Z",
+    "dateExported": "2024-06-15T19:01:23.732Z",
     "version": "1.1",
     "folders": [
         {
@@ -764,6 +764,30 @@
                 }
             ],
             "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1cd38aab-99f9-44d1-b668-45c62a97b873",
+            "colId": "f5f2946e-9458-47ea-b9ab-92e7bbe143e0",
+            "containerId": "eed39075-275d-444b-ba45-3040f7a0fb50",
+            "name": "GETBYID",
+            "url": "localhost:2656/favorite/getById",
+            "method": "POST",
+            "sortNum": 310000,
+            "created": "2024-06-15T19:00:37.091Z",
+            "modified": "2024-06-15T19:01:02.274Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "search",
+                        "value": "6667fc048c8c880e3738a173"
+                    }
+                ]
+            },
             "tests": []
         }
     ]
