@@ -5,10 +5,14 @@ import Account from "../account/account.model.js";
 import moment from "moment-timezone";
 import {checkUpdateAmount} from '../utils/validator.js'
 
+
+//Ahora debes escribir el noAccount en vez del account
 export const depositMoney = async (req, res) => {
   try {
     let data = req.body;
-    let account = await Account.findOne({ _id: data.account });
+    
+    // Buscar la cuenta por noaccount
+    let account = await Account.findOne({ noaccount: data.noaccount });
     if (!account)
       return res.status(404).send({ message: "Account does not exist" });
 
@@ -24,7 +28,7 @@ export const depositMoney = async (req, res) => {
 
     // Crear un registro del depósito
     let depositData = {
-      account: data.account,
+      account: account._id, // Usar el _id de la cuenta encontrada
       amount: depositAmount,
       date: moment().tz("America/Guatemala").toDate() 
     };
