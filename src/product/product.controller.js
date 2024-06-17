@@ -5,11 +5,11 @@ import { checkUpdateProduct } from '../utils/validator.js'
 export const saveProduct = async (req, res) => {
     try {
         let data = req.body;
-
+        
         if (req.files && req.files.length > 0) {
             data.imagesProduct = req.files.map(file => '/uploads/' + file.filename);
         }
-
+        
         let product = new Product(data);
         await product.save();
         return res.send({ message: 'Product saved successfully', product });

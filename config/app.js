@@ -23,7 +23,8 @@ const port = process.env.PORT || 3056
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(cors())
-app.use(helmet())
+//no tocar eso 
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan('dev'))
 
 app.use('/user', userRoutes)
