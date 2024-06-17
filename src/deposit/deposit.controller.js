@@ -3,7 +3,11 @@
 import Deposit from "./deposit.model.js";
 import Account from "../account/account.model.js";
 import moment from "moment-timezone";
+<<<<<<< HEAD
 import {checkUpdateAmount} from '../utils/validator.js'
+=======
+
+>>>>>>> 0af3b617457134efff09409f1a05991477e1f5e6
 
 export const depositMoney = async (req, res) => {
   try {
@@ -36,6 +40,7 @@ export const depositMoney = async (req, res) => {
     console.error(error);
     return res.status(500).send({ message: "Error depositing money" });
   }
+<<<<<<< HEAD
 };
 
 
@@ -57,3 +62,6 @@ export const updateAmount = async(req, res) =>{
     return res.status(500).send({message: 'Have submitted some data that cannot be updated or missing data'})
   }
 }
+=======
+};
+>>>>>>> 0af3b617457134efff09409f1a05991477e1f5e6

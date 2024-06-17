@@ -12,8 +12,12 @@ import productRoutes from '../src/product/product.routes.js'
 import accountRoutes from '../src/account/account.routes.js'
 import depositRoutes from '../src/deposit/deposit.routes.js'
 import transferRoutes from '../src/transfer/transfer.routes.js'
+<<<<<<< HEAD
 import buyRoutes from '../src/buys/buys.routes.js'
 import favoriteRoutes from '../src/favorites/favorites.routes.js'
+=======
+
+>>>>>>> 0af3b617457134efff09409f1a05991477e1f5e6
 
 //Configuraciones
 const app = express()
@@ -31,8 +35,11 @@ app.use('/product', productRoutes)
 app.use('/account', accountRoutes)
 app.use('/deposit', depositRoutes)
 app.use('/transfer', transferRoutes)
+<<<<<<< HEAD
 app.use('/buy', buyRoutes)
 app.use('/favorite', favoriteRoutes)
+=======
+>>>>>>> 0af3b617457134efff09409f1a05991477e1f5e6
 
 export const initServer = () => {
     app.listen(port)
