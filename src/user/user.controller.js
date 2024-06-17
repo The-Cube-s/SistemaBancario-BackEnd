@@ -90,10 +90,6 @@ export const register = async(req, res) =>{
         if(findUser) return res.status(403).send({satisfiesmessage: `User ${data.username} alredy exists`})
         
         if (parseFloat(data.monthlyincome) < 100) {
-<<<<<<< HEAD
-=======
-            //return res.status(400).send({ message: '' });
->>>>>>> 0af3b617457134efff09409f1a05991477e1f5e6
             return res.status(400).send({ message: 'Monthly income should be 100 or more'});
         }
 

@@ -52,7 +52,6 @@ export const checkUpdate = (data, userId) => {
         }
         if (data.password === '') {
             return false;
-<<<<<<< HEAD
         }
     }
     return true;
@@ -69,11 +68,9 @@ export const checkUpdateBuy = async (data, buyId) => {
             data.product ||
             data.product == '') {
             return false
-=======
->>>>>>> 0af3b617457134efff09409f1a05991477e1f5e6
         }
+        return true
     }
-<<<<<<< HEAD
 }
 
 export const checkUpdateAmount = (data, depositId) => {
@@ -90,7 +87,3 @@ export const checkUpdateAmount = (data, depositId) => {
     }
     return true
 }
-=======
-    return true;
-};
->>>>>>> 0af3b617457134efff09409f1a05991477e1f5e6

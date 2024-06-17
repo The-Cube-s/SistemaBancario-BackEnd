@@ -18,13 +18,8 @@ const userSchema = Schema({
     DPI: {
         type: Number,
         unique: true,
-<<<<<<< HEAD
         maxlength: 13,
         minlength: 13,
-=======
-        maxLength: 13,
-        minLength: 13,
->>>>>>> 0af3b617457134efff09409f1a05991477e1f5e6
         required: true
     },
     address: {
