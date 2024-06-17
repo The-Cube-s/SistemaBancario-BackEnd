@@ -33,6 +33,9 @@ app.use('/deposit', depositRoutes)
 app.use('/transfer', transferRoutes)
 app.use('/buy', buyRoutes)
 app.use('/favorite', favoriteRoutes)
+//imagenes
+app.use('/uploads', express.static('src/uploads'));
+
 
 export const initServer = () => {
     app.listen(port)

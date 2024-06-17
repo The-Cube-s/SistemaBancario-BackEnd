@@ -54,6 +54,10 @@ const userSchema = Schema({
         uppercase: true,
         enum: ['CLIENT', 'ADMIN'],
         required: true
+    },
+    imagesUser: {
+        type: [String],
+        //required: true    
     }
 },{
     versionKey: false
