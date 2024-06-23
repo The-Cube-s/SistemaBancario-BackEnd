@@ -14,6 +14,7 @@ import depositRoutes from '../src/deposit/deposit.routes.js'
 import transferRoutes from '../src/transfer/transfer.routes.js'
 import buyRoutes from '../src/buys/buys.routes.js'
 import favoriteRoutes from '../src/favorites/favorites.routes.js'
+import billRoutes from '../src/bill/bill.routes.js'
 
 //Configuraciones
 const app = express()
@@ -34,7 +35,7 @@ app.use('/deposit', depositRoutes)
 app.use('/transfer', transferRoutes)
 app.use('/buy', buyRoutes)
 app.use('/favorite', favoriteRoutes)
-//imagenes
+app.use('/bill', billRoutes)
 app.use('/uploads', express.static('src/uploads'));
 
 
