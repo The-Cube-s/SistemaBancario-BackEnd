@@ -104,11 +104,6 @@ export const getAccountBalance = async (req, res) => {
             return res.status(404).send({ message: 'User not found' });
         }
 
-        // Si el usuario existe pero no tiene ese tipo de cuenta
-        if (account.typeofaccount !== req.body.typeofaccount) {
-            return res.status(400).send({ message: `User does not have an account of type ${req.body.typeofaccount}` });
-        }
-
         // Verificando si el usuario autenticado es ADMIN o el propietario de la cuenta
         if (req.user.role === 'ADMIN' || req.user._id.toString() === user._id.toString()) {
             return res.send({ balance: account.balance });
