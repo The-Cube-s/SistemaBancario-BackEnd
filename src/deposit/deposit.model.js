@@ -13,6 +13,10 @@ const depositSchema = Schema({
         type: Schema.ObjectId,
         ref: 'account',
         required: true
+    },
+    user: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'user' 
     }
 },
 {

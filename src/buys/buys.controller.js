@@ -15,38 +15,61 @@ export const test = (req, res) => {
 export const saveBuy = async (req, res) => {
     try {
         let data = req.body;
-        let user = await User.findOne({ _id: data.user })
-        let product = await Product.findOne({ _id: data.product })
-        let amountPrd = product.amount
-        if(!user ) return res.status(404).send({message: 'User not found'})
-        if(!product ) return res.status(404).send({message: 'Product not found'})
-        let secretKey = process.env.SECRET_KEY
-        let token = req.headers.authorization
-        const { uid } = jwt.verify(token, secretKey)
-        if(uid !== data.user) return res.status(401).send({ message: 'Enter your ID to make a buy'})
-        if( amountPrd === 0 ) return res.status(401).send({ message: 'We do not have that producto avaible'})
-        let buy = await Buys.findOne({ user: data.user, product: data.product })
-        if(buy){
-            buy.amount = +buy.amount + +data.amount
-        }else{
-            buy = new Buys({
+
+        // Verificar que el usuario existe
+        let user = await User.findOne({ _id: data.user });
+        if (!user) return res.status(404).send({ message: 'User not found' });
+
+        // Verificar que el producto existe
+        let product = await Product.findOne({ _id: data.product });
+        if (!product) return res.status(404).send({ message: 'Product not found' });
+
+        let amountPrd = product.amount;
+        //lo que hay en stock
+        console.log(amountPrd);
+        if (amountPrd === 0) return res.status(401).send({ message: 'Product not available' });
+
+        // Verificar el token
+        const userId = req.user._id;
+        //traer el userId del token 
+        console.log(userId);
+        if (userId != data.user) return res.status(401).send({ message: 'Unauthorized user' });
+
+        // Verificar si la compra ya existe
+        let buy = await Buys.findOne({ user: data.user, product: data.product });
+        let newAmount = parseInt(data.amount);
+
+        // Verificar si hay suficiente cantidad del producto disponible
+        if (amountPrd < newAmount) {
+            console.log(amountPrd, newAmount);
+            return res.status(404).send({ message: 'Insufficient product amount available' });
+        }
+
+        console.log(amountPrd + " " + newAmount);
+        // Actualizar la cantidad del producto
+        product.amount -= data.amount;
+        await product.save();
+
+        // Actualizar o crear la compra
+        if (buy) {
+            buy.amount += newAmount;
+            console.log(buy.amount);
+            await buy.save();
+        } else {
+            let newBuy = new Buys({
                 amount: data.amount,
                 user: data.user,
                 product: data.product
-            })
+            });
+            await newBuy.save();
         }
-        let amount = buy.amount
-        if(amountPrd < amount) return res.status(404).send({message: 'Dont exists the amount required'})
-        product.amount -= buy.amount
-        await product.save()
-        await buy.save();
-        return res.send({ message: 'Buy is successful' });
+
+        return res.send({ message: 'Purchase successful' });
     } catch (err) {
         console.error(err);
-        return res.status(500).send({ message: 'Buy was not saved', error: err.message });
+        return res.status(500).send({ message: 'Purchase could not be saved', error: err.message });
     }
-}
-
+};
 export const updateBuy = async (req, res) => {
     try {
         let data = req.body
