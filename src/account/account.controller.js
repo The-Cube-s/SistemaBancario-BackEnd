@@ -35,8 +35,9 @@ export const saveAccount = async (req, res) => {
 
         if (data.balance < 0) return res.status(401).send({ message: 'The balance cannot be less than 0' });
 
-        data.noaccount =  mathRandom();
+        data.noaccount = await mathRandom();
         let account = new Account(data);
+
         await account.save();
         return res.send({ message: 'Account saved successfully', account });
     } catch (err) {
@@ -47,7 +48,7 @@ export const saveAccount = async (req, res) => {
 
 export const getAccount = async (req, res) => {
     try {
-        let accounts = await Account.find();
+        let accounts = await Account.find().populate('user', 'name');
         //desestructure
         return res.send({accounts});
     } catch (err) {
