@@ -5,6 +5,7 @@ import { checkUpdateBuy } from '../utils/validator.js'
 //nuevos import
 import User from "../user/user.model.js"
 import Product from "../product/product.model.js"
+import Account from '../account/account.model.js'
 import jwt from 'jsonwebtoken'
 
 export const test = (req, res) => {
@@ -14,62 +15,56 @@ export const test = (req, res) => {
 
 export const saveBuy = async (req, res) => {
     try {
-        let data = req.body;
+        let data = req.body 
 
-        // Verificar que el usuario existe
-        let user = await User.findOne({ _id: data.user });
-        if (!user) return res.status(404).send({ message: 'User not found' });
+        let user = await User.findOne({ _id: data.user }) 
+        if (!user) return res.status(404).send({ message: 'User not found' }) 
 
-        // Verificar que el producto existe
-        let product = await Product.findOne({ _id: data.product });
-        if (!product) return res.status(404).send({ message: 'Product not found' });
+        let product = await Product.findOne({ _id: data.product }) 
+        if (!product) return res.status(404).send({ message: 'Product not found' }) 
 
-        let amountPrd = product.amount;
-        //lo que hay en stock
-        console.log(amountPrd);
-        if (amountPrd === 0) return res.status(401).send({ message: 'Product not available' });
+        let account = await Account.findOne({ user: data.user }) 
+        if (!account) return res.status(404).send({ message: 'User account not found' }) 
 
-        // Verificar el token
-        const userId = req.user._id;
-        //traer el userId del token 
-        console.log(userId);
-        if (userId != data.user) return res.status(401).send({ message: 'Unauthorized user' });
+        const userId = req.user._id 
+        if (userId != data.user) return res.status(401).send({ message: 'Unauthorized user' }) 
 
-        // Verificar si la compra ya existe
-        let buy = await Buys.findOne({ user: data.user, product: data.product });
-        let newAmount = parseInt(data.amount);
+        let newAmount = parseInt(data.amount) 
 
-        // Verificar si hay suficiente cantidad del producto disponible
-        if (amountPrd < newAmount) {
-            console.log(amountPrd, newAmount);
-            return res.status(404).send({ message: 'Insufficient product amount available' });
+        if (product.amount < newAmount) {
+            return res.status(404).send({ message: 'Insufficient product amount available' }) 
         }
 
-        console.log(amountPrd + " " + newAmount);
-        // Actualizar la cantidad del producto
-        product.amount -= data.amount;
-        await product.save();
+        if (account.balance < product.price * newAmount) {
+            return res.status(403).send({ message: 'Insufficient balance' }) 
+        }
 
-        // Actualizar o crear la compra
+        product.amount -= newAmount 
+        await product.save() 
+
+        account.balance -= product.price * newAmount 
+        await account.save() 
+
+        let buy = await Buys.findOne({ user: data.user, product: data.product }) 
         if (buy) {
-            buy.amount += newAmount;
-            console.log(buy.amount);
-            await buy.save();
+            buy.amount += newAmount 
+            await buy.save() 
         } else {
             let newBuy = new Buys({
-                amount: data.amount,
+                amount: newAmount,
                 user: data.user,
                 product: data.product
-            });
-            await newBuy.save();
+            }) 
+            await newBuy.save() 
         }
 
-        return res.send({ message: 'Purchase successful' });
+        return res.send({ message: 'Purchase successful' }) 
     } catch (err) {
-        console.error(err);
-        return res.status(500).send({ message: 'Purchase could not be saved', error: err.message });
-    }
-};
+        console.error(err) 
+            return res.status(500).send({ message: 'Purchase could not be saved', error: err.message }) 
+    }
+} 
+
 export const updateBuy = async (req, res) => {
     try {
         let data = req.body
