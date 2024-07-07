@@ -116,3 +116,16 @@ export const getAccountBalance = async (req, res) => {
         return res.status(500).send({ message: 'Error getting account balance' });
     }
 };
+
+export const deleteAccount = async(req, res) =>{
+    try {
+        const { id } = req.params
+        let deleteAccount = await Account.findOneAndDelete({ _id: id })
+        if(!deleteAccount) return res.status(404).send({ message: 'The account not found'})
+
+        return res.send({ message: `Account of user ${deleteAccount.user} was deleted successfully`})
+    } catch (err) {
+        return res.status(500).send({ error: err.message})
+        
+    }
+}
