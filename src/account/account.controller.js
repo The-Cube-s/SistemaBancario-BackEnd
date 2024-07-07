@@ -129,3 +129,20 @@ export const deleteAccount = async(req, res) =>{
         
     }
 }
+
+export const getAccountsByUser = async (req, res) => {
+    try {
+        
+        const userId = req.user._id;
+        const accounts = await Account.find({ user: userId });
+        
+        if (accounts.length === 0) {
+            return res.status(404).send({ message: 'No accounts found for this user.' });
+        }
+        
+        return res.send(accounts);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error retrieving user accounts' });
+    }
+};

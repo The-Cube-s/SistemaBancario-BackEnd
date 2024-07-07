@@ -61,3 +61,37 @@ export const updateAmount = async(req, res) =>{
     return res.status(500).send({message: 'Have submitted some data that cannot be updated or missing data'})
   }
 }
+
+export const getAllDeposits = async (req, res) => {
+  try {
+      const deposits = await Deposit.find().populate('user', 'username').populate('account', 'noaccount');
+      return res.send(deposits);
+  } catch (error) {
+      console.error('Failed to retrieve deposits:', error);
+      return res.status(500).send({ message: 'Error retrieving all deposits' });
+  }
+};
+
+
+export const getUserDeposits = async (req, res) => {
+  try {
+    const userId = req.user._id;  // Asegúrate de que el middleware de autenticación esté configurado para establecer esto.
+
+    // Primero, encontramos todas las cuentas que pertenecen al usuario.
+    const accounts = await Account.find({ user: userId });
+    if (accounts.length === 0) {
+      return res.status(404).send({ message: "No accounts found for this user." });
+    }
+
+    // Extraemos los IDs de las cuentas para buscar depósitos relacionados.
+    const accountIds = accounts.map(account => account._id);
+
+    // Buscamos todos los depósitos que pertenecen a cualquiera de las cuentas del usuario.
+    const deposits = await Deposit.find({ account: { $in: accountIds } }).populate('account', 'noaccount');
+
+    return res.send({ deposits });
+  } catch (error) {
+    console.error('Failed to retrieve user deposits:', error);
+    return res.status(500).send({ message: 'Error retrieving user deposits' });
+  }
+};
