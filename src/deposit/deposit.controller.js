@@ -5,8 +5,6 @@ import Account from "../account/account.model.js";
 import moment from "moment-timezone";
 import {checkUpdateAmount} from '../utils/validator.js'
 
-
-//Ahora debes escribir el noAccount en vez del account
 export const depositMoney = async (req, res) => {
   try {
     let data = req.body;
@@ -21,12 +19,10 @@ export const depositMoney = async (req, res) => {
     if (isNaN(depositAmount)) {
       return res.status(400).send({ message: "Invalid amount" });
     }
-
-    // Realizar el depósito
+    
     account.balance += depositAmount; 
     await account.save();
 
-    // Crear un registro del depósito
     let depositData = {
       account: account._id, // Usar el _id de la cuenta encontrada
       amount: depositAmount,
@@ -41,7 +37,6 @@ export const depositMoney = async (req, res) => {
     return res.status(500).send({ message: "Error depositing money" });
   }
 };
-
 
 export const updateAmount = async(req, res) =>{
   try {

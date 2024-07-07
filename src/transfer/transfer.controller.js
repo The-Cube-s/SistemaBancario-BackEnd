@@ -1,19 +1,19 @@
 import Transfer from '../transfer/transfer.model.js'
 import Account from '../account/account.model.js'
+import User from '../user/user.model.js'
 
-// historial de la cuenta
 export const getAccountInfo = async (req, res) => {
     try {
         const userId = req.user.id;
-        // Busca todas las transferencias asociadas al usuario
+
         const transfers = await Transfer.find({ user: userId });
-        // Calcula el saldo actual sumando los créditos y restando los débitos
+
         let saldo = 0;
         transfers.forEach(transfer => {
             if (transfer.userTarget.toString() === userId.toString()) {
-                saldo += transfer.amount // Crédito
+                saldo += transfer.amount 
             } else {
-                saldo -= transfer.amount // Débito
+                saldo -= transfer.amount 
             }
         })
 

@@ -10,11 +10,13 @@ const transferSchema = new Schema({
         type: Number,
         required: true
     },
+    //
     userTarget: {
         type: Schema.ObjectId,
         ref: 'account',
         required: true
     },
+    //mandar el id del token que esta loggeado
     user: {
         type: Schema.ObjectId,
         ref: 'user',
