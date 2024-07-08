@@ -70,23 +70,31 @@ export const getAllDeposits = async (req, res) => {
 
 export const getUserDeposits = async (req, res) => {
   try {
-    const userId = req.user._id;  // Asegúrate de que el middleware de autenticación esté configurado para establecer esto.
+      const userId = req.user._id; 
 
-    // Primero, encontramos todas las cuentas que pertenecen al usuario.
-    const accounts = await Account.find({ user: userId });
-    if (accounts.length === 0) {
-      return res.status(404).send({ message: "No accounts found for this user." });
-    }
+      // Primero, encontramos todas las cuentas que pertenecen al usuario
+      const accounts = await Account.find({ user: userId });
+      if (accounts.length === 0) {
+          return res.status(404).send({ message: "No accounts found for this user." });
+      }
 
-    // Extraemos los IDs de las cuentas para buscar depósitos relacionados.
-    const accountIds = accounts.map(account => account._id);
+      // Extraemos los IDs de las cuentas para buscar depósitos relacionados
+      const accountIds = accounts.map(account => account._id);
 
-    // Buscamos todos los depósitos que pertenecen a cualquiera de las cuentas del usuario.
-    const deposits = await Deposit.find({ account: { $in: accountIds } }).populate('account', 'noaccount');
+      // Hacemos un populate a usuario que esta ref al account
+      const deposits = await Deposit.find({ account: { $in: accountIds } })
+          .populate({
+              path: 'account',
+              select: 'noaccount typeofaccount',
+              populate: {
+                  path: 'user',
+                  select: 'name'
+              }
+          });
 
-    return res.send({ deposits });
+      return res.send({ deposits });
   } catch (error) {
-    console.error('Failed to retrieve user deposits:', error);
-    return res.status(500).send({ message: 'Error retrieving user deposits' });
+      console.error('Failed to retrieve user deposits:', error);
+      return res.status(500).send({ message: 'Error retrieving user deposits' });
   }
 };
