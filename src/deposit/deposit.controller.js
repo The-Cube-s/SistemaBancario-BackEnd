@@ -1,12 +1,11 @@
 "use strict";
+import User from '../user/user.model.js'
 
 import Deposit from "./deposit.model.js";
 import Account from "../account/account.model.js";
 import moment from "moment-timezone";
 import {checkUpdateAmount} from '../utils/validator.js'
 
-
-//Ahora debes escribir el noAccount en vez del account
 export const depositMoney = async (req, res) => {
   try {
     let data = req.body;
@@ -21,12 +20,10 @@ export const depositMoney = async (req, res) => {
     if (isNaN(depositAmount)) {
       return res.status(400).send({ message: "Invalid amount" });
     }
-
-    // Realizar el depósito
+    
     account.balance += depositAmount; 
     await account.save();
 
-    // Crear un registro del depósito
     let depositData = {
       account: account._id, // Usar el _id de la cuenta encontrada
       amount: depositAmount,
@@ -41,7 +38,6 @@ export const depositMoney = async (req, res) => {
     return res.status(500).send({ message: "Error depositing money" });
   }
 };
-
 
 export const updateAmount = async(req, res) =>{
   try {
@@ -62,7 +58,6 @@ export const updateAmount = async(req, res) =>{
   }
 }
 
-//Para Admin
 export const getAllDeposits = async (req, res) => {
   try {
       const deposits = await Deposit.find().populate('user', 'username').populate('account', 'noaccount');
@@ -73,26 +68,34 @@ export const getAllDeposits = async (req, res) => {
   }
 };
 
-//Para ver mis depositos
+
 export const getUserDeposits = async (req, res) => {
   try {
-    const userId = req.user._id;  // Asegúrate de que el middleware de autenticación esté configurado para establecer esto.
+      const userId = req.user._id; 
 
-    // Primero, encontramos todas las cuentas que pertenecen al usuario.
-    const accounts = await Account.find({ user: userId });
-    if (accounts.length === 0) {
-      return res.status(404).send({ message: "No accounts found for this user." });
-    }
+      // Primero, encontramos todas las cuentas que pertenecen al usuario
+      const accounts = await Account.find({ user: userId });
+      if (accounts.length === 0) {
+          return res.status(404).send({ message: "No accounts found for this user." });
+      }
 
-    // Extraemos los IDs de las cuentas para buscar depósitos relacionados.
-    const accountIds = accounts.map(account => account._id);
+      // Extraemos los IDs de las cuentas para buscar depósitos relacionados
+      const accountIds = accounts.map(account => account._id);
 
-    // Buscamos todos los depósitos que pertenecen a cualquiera de las cuentas del usuario.
-    const deposits = await Deposit.find({ account: { $in: accountIds } }).populate('account', 'noaccount');
+      // Hacemos un populate a usuario que esta ref al account
+      const deposits = await Deposit.find({ account: { $in: accountIds } })
+          .populate({
+              path: 'account',
+              select: 'noaccount typeofaccount',
+              populate: {
+                  path: 'user',
+                  select: 'name'
+              }
+          });
 
-    return res.send({ deposits });
+      return res.send({ deposits });
   } catch (error) {
-    console.error('Failed to retrieve user deposits:', error);
-    return res.status(500).send({ message: 'Error retrieving user deposits' });
+      console.error('Failed to retrieve user deposits:', error);
+      return res.status(500).send({ message: 'Error retrieving user deposits' });
   }
 };

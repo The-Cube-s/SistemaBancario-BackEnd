@@ -5,6 +5,7 @@ import { checkUpdateBuy } from '../utils/validator.js'
 //nuevos import
 import User from "../user/user.model.js"
 import Product from "../product/product.model.js"
+import Account from '../account/account.model.js'
 import jwt from 'jsonwebtoken'
 
 export const test = (req, res) => {
@@ -14,62 +15,62 @@ export const test = (req, res) => {
 
 export const saveBuy = async (req, res) => {
     try {
-        let data = req.body;
+        let data = req.body 
 
-        // Verificar que el usuario existe
-        let user = await User.findOne({ _id: data.user });
-        if (!user) return res.status(404).send({ message: 'User not found' });
+        let user = await User.findOne({ _id: data.user }) 
+        if (!user) return res.status(404).send({ message: 'User not found' }) 
 
-        // Verificar que el producto existe
-        let product = await Product.findOne({ _id: data.product });
-        if (!product) return res.status(404).send({ message: 'Product not found' });
+        let product = await Product.findOne({ _id: data.product }) 
+        if (!product) return res.status(404).send({ message: 'Product not found' }) 
 
-        let amountPrd = product.amount;
-        //lo que hay en stock
-        console.log(amountPrd);
-        if (amountPrd === 0) return res.status(401).send({ message: 'Product not available' });
+        let account = await Account.findOne({ user: data.user }) 
+        if (!account) return res.status(404).send({ message: 'User account not found' }) 
 
-        // Verificar el token
-        const userId = req.user._id;
-        //traer el userId del token 
+        const userId = req.user._id 
+        if (userId != data.user) return res.status(401).send({ message: 'Unauthorized user' }) 
+        
         console.log(userId);
-        if (userId != data.user) return res.status(401).send({ message: 'Unauthorized user' });
 
-        // Verificar si la compra ya existe
-        let buy = await Buys.findOne({ user: data.user, product: data.product });
-        let newAmount = parseInt(data.amount);
+        let newAmount = parseInt(data.amount) 
 
-        // Verificar si hay suficiente cantidad del producto disponible
-        if (amountPrd < newAmount) {
-            console.log(amountPrd, newAmount);
-            return res.status(404).send({ message: 'Insufficient product amount available' });
+        if (product.amount < newAmount) {
+            return res.status(404).send({ message: 'Insufficient product amount available' }) 
         }
 
-        console.log(amountPrd + " " + newAmount);
-        // Actualizar la cantidad del producto
-        product.amount -= data.amount;
-        await product.save();
+        if(data.amount <= 0){
+            return res.status(400).send({ message: 'You cannot add quantity less than 0' })
+        }
 
-        // Actualizar o crear la compra
+        if (account.balance < product.price * newAmount) {
+            return res.status(403).send({ message: 'Insufficient balance' }) 
+        }
+
+        product.amount -= newAmount 
+        await product.save() 
+
+        account.balance -= product.price * newAmount 
+        await account.save() 
+
+        let buy = await Buys.findOne({ user: data.user, product: data.product }) 
         if (buy) {
-            buy.amount += newAmount;
-            console.log(buy.amount);
-            await buy.save();
+            buy.amount += newAmount 
+            await buy.save() 
         } else {
             let newBuy = new Buys({
-                amount: data.amount,
+                amount: newAmount,
                 user: data.user,
                 product: data.product
-            });
-            await newBuy.save();
+            }) 
+            await newBuy.save() 
         }
 
-        return res.send({ message: 'Purchase successful' });
+        return res.send({ message: 'Purchase successful' }) 
     } catch (err) {
-        console.error(err);
-        return res.status(500).send({ message: 'Purchase could not be saved', error: err.message });
-    }
-};
+        console.error(err) 
+            return res.status(500).send({ message: 'Purchase could not be saved', error: err.message }) 
+    }
+} 
+
 export const updateBuy = async (req, res) => {
     try {
         let data = req.body
@@ -133,44 +134,3 @@ export const getAllBuys = async (req, res) => {
     }
 }
 
-//compra de producto 
-export const buyProduct = async (req, res) => {
-    try {
-        const { clientId, productId } = req.body
-        
-        // Buscar al cliente por su ID
-        const client = await User.findById(clientId)
-        if (!client) {
-            return res.status(404).send({ message: "Client not found" })
-        }
-
-        // Buscar el producto por su ID
-        const product = await Product.findById(productId)
-        if (!product) {
-            return res.status(404).send({ message: "Product not found" })
-        }
-
-        // Verificar si el saldo del cliente es suficiente para comprar el producto
-        if (client.balance < product.price) {
-            return res.status(400).send({ message: "Insufficient balance to buy the product" })
-        }
-
-        // Crear una nueva compra
-        const buy = new Buys({
-            amount: product.price,  // El monto de la compra es el precio del producto
-            user: client._id,       // El usuario que realiza la compra
-            product: product._id    // El producto que se está comprando
-        });
-        await buy.save() //compra en la base de datos
-
-        // Restar el precio del producto del saldo del cliente
-        client.balance -= product.price
-        await client.save() // saldo actualizado del cliente
-
-        // Devolver una respuesta exitosa
-        return res.send({ message: "Purchase successful", buy })
-    } catch (err) {
-        console.error(err)
-        return res.status(500).send({ message: "Error buying product", error: err.message })
-    }
-};

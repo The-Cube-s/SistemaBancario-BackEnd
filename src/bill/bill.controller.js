@@ -16,7 +16,8 @@ export const makeBill = async(req, res) => {
     try {
         const data = req.body;
         const userId = req.user._id;
-
+        console.log(data);
+        
         // Buscar las compras del usuario
         const buys = await Buy.find({ user: userId });
         if (!buys || buys.length === 0) return res.status(404).send({ message: 'Buys not found' });

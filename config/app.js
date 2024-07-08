@@ -1,7 +1,5 @@
-//Levantamos el serivdor http con express   
 'use strict'
 
-//Importaciones
 import express from "express"
 import morgan from "morgan"
 import helmet from "helmet"

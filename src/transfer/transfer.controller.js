@@ -1,29 +1,32 @@
 import Transfer from '../transfer/transfer.model.js'
 import Account from '../account/account.model.js'
+import User from '../user/user.model.js'
 
-// historial de la cuenta
 export const getAccountInfo = async (req, res) => {
     try {
         const userId = req.user.id;
-        // Busca todas las transferencias asociadas al usuario
-        const transfers = await Transfer.find({ user: userId });
-        // Calcula el saldo actual sumando los créditos y restando los débitos
+
+        // Obtener todas las transferencias del usuario y popular los datos relevantes
+        const transfers = await Transfer.find({ user: userId })
+            .populate('user', 'name') // Popular el nombre del usuario
+            .populate('userTarget', 'typeofaccount'); // Popular el tipo de cuenta del usuario de destino
+
         let saldo = 0;
         transfers.forEach(transfer => {
-            if (transfer.userTarget.toString() === userId.toString()) {
-                saldo += transfer.amount // Crédito
+            if (transfer.userTarget._id.toString() === userId.toString()) {
+                saldo += transfer.amount;
             } else {
-                saldo -= transfer.amount // Débito
+                saldo -= transfer.amount;
             }
-        })
+        });
 
-        // respuesta con el saldo y el historial de transferencias
-        res.status(200).send({ saldo, transfers })
+        // Respuesta con el saldo y el historial de transferencias
+        res.status(200).send({ saldo, transfers });
     } catch (error) {
-        console.error('Error al obtener la información de la cuenta:', error)
-        res.status(500).send({ message: 'Error al obtener la información de la cuenta' })
+        console.error('Error al obtener la información de la cuenta:', error);
+        res.status(500).send({ message: 'Error al obtener la información de la cuenta' });
     }
-}
+};
 
 // realiza una transferencia
 export const transferAmount = async (req, res) => {

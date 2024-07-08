@@ -37,6 +37,7 @@ export const saveAccount = async (req, res) => {
 
         data.noaccount = await mathRandom();
         let account = new Account(data);
+
         await account.save();
         return res.send({ message: 'Account saved successfully', account });
     } catch (err) {
@@ -47,7 +48,7 @@ export const saveAccount = async (req, res) => {
 
 export const getAccount = async (req, res) => {
     try {
-        let accounts = await Account.find();
+        let accounts = await Account.find().populate('user', 'name');
         //desestructure
         return res.send({accounts});
     } catch (err) {
@@ -115,6 +116,19 @@ export const getAccountBalance = async (req, res) => {
         return res.status(500).send({ message: 'Error getting account balance' });
     }
 };
+
+export const deleteAccount = async(req, res) =>{
+    try {
+        const { id } = req.params
+        let deleteAccount = await Account.findOneAndDelete({ _id: id })
+        if(!deleteAccount) return res.status(404).send({ message: 'The account not found'})
+
+        return res.send({ message: `Account of user ${deleteAccount.user} was deleted successfully`})
+    } catch (err) {
+        return res.status(500).send({ error: err.message})
+        
+    }
+}
 
 export const getAccountsByUser = async (req, res) => {
     try {
