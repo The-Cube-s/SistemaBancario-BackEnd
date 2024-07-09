@@ -1,5 +1,4 @@
 "use strict";
-import User from '../user/user.model.js'
 
 import Deposit from "./deposit.model.js";
 import Account from "../account/account.model.js";

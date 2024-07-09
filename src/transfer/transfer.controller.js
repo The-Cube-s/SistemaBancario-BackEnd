@@ -28,6 +28,9 @@ export const getAccountInfo = async (req, res) => {
     }
 };
 
+
+
+
 // realiza una transferencia
 export const transferAmount = async (req, res) => {
     try {

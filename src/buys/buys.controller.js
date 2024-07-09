@@ -134,3 +134,22 @@ export const getAllBuys = async (req, res) => {
     }
 }
 
+
+export const getUserBuys = async (req, res) => {
+    try {
+        const userId = req.user._id; // Suponiendo que el ID del usuario autenticado está en req.user._id
+        let buys = await Buys.find({ user: userId })
+            .populate({
+                path: 'user',
+                select: 'name'
+            })
+            .populate('product');
+        if (!buys || buys.length === 0) {
+            return res.status(404).send({ message: 'No purchases found for this user' });
+        }
+        return res.send(buys);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error retrieving user purchases', error: err.message });
+    }
+}
