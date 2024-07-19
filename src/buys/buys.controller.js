@@ -111,7 +111,6 @@ export const getBuy = async (req, res) => {
                 select: 'name surname username DPI email phone'
             })
             .populate('product');
-        if (!buy) return res.status(404).send({ message: 'Buy not found' });
         return res.send(buy);
     } catch (err) {
         console.error(err);
@@ -144,9 +143,7 @@ export const getUserBuys = async (req, res) => {
                 select: 'name'
             })
             .populate('product');
-        if (!buys || buys.length === 0) {
-            return res.status(404).send({ message: 'No purchases found for this user' });
-        }
+
         return res.send(buys);
     } catch (err) {
         console.error(err);

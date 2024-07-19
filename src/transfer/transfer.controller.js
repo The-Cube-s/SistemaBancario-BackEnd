@@ -40,6 +40,11 @@ export const transferAmount = async (req, res) => {
         /*console.log(`DPI del usuario logeado: ${dpi}`);
         console.log(`NoAccount recibido: ${noaccount}`);
         console.log(`Amount recibido: ${amount}`);*/
+        console.log(userId);
+        
+        const userTransfer = await Transfer.findOne({ user: userId})
+        console.log(userTransfer);
+        if(userId == userTransfer.user ) return res.status(404).send({ message: 'No se puede transferir a su misma cuenta'})
         if (amount > 2000) return res.status(400).send({ message: 'No se puede transferir más de Q2000' });
         const accountOrigin = await Account.findOne({ user: userId }).populate('user');
         if (!accountOrigin) {
